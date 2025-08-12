@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        @apply bg-gray-900 text-white overflow-hidden;
+    }
+
+    html {
+        @apply overflow-hidden;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+        height: 8px;
+        width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        @apply bg-gray-800;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        @apply bg-gray-600 rounded-full;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        @apply bg-gray-500;
+    }
+}
+
+@layer components {
+    .chaos-gradient {
+        background: linear-gradient(45deg, #ef4444, #8b5cf6, #06b6d4, #10b981);
+        background-size: 400% 400%;
+        animation: gradient 15s ease infinite;
+    }
+
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Force horizontal scrolling */
+    .horizontal-scroll {
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+
+    .horizontal-scroll::-webkit-scrollbar {
+        height: 0px;
+        background: transparent;
+    }
+
+    /* Smooth story transitions */
+    .story-container {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Blending effect between stories */
+    .story-blend {
+        position: relative;
+    }
+
+    .story-blend::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -50px;
+        width: 100px;
+        height: 100%;
+        background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.1), transparent);
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .story-blend::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: -50px;
+        width: 100px;
+        height: 100%;
+        background: linear-gradient(to left, transparent, rgba(0, 0, 0, 0.1), transparent);
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    @keyframes gradient {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+}
