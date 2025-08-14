@@ -91,6 +91,21 @@
         z-index: 1;
     }
 
+    /* Onboarding animations */
+    .fade-in {
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    /* Edge preview animations */
+    .edge-preview-enter {
+        animation: slideInFromEdge 0.3s ease-out;
+    }
+
+    /* Pulse animation for hints */
+    .pulse-hint {
+        animation: pulseHint 2s infinite;
+    }
+
     @keyframes gradient {
         0% {
             background-position: 0% 50%;
@@ -104,4 +119,572 @@
             background-position: 0% 50%;
         }
     }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes slideInFromEdge {
+        from {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes pulseHint {
+
+        0%,
+        100% {
+            opacity: 0.3;
+            transform: scale(1);
+        }
+
+        50% {
+            opacity: 0.8;
+            transform: scale(1.1);
+        }
+    }
+}
+
+/* Glitch Effects */
+.glitch-rgb {
+    animation: glitch-rgb 0.3s ease-in-out;
+}
+
+.glitch-static {
+    animation: glitch-static 0.5s ease-in-out;
+}
+
+.glitch-distort {
+    animation: glitch-distort 0.4s ease-in-out;
+}
+
+.glitch-invert {
+    animation: glitch-invert 0.2s ease-in-out;
+}
+
+@keyframes glitch-rgb {
+    0% {
+        transform: translate(0);
+    }
+
+    20% {
+        transform: translate(-2px, 2px);
+        filter: hue-rotate(90deg);
+    }
+
+    40% {
+        transform: translate(-2px, -2px);
+        filter: hue-rotate(180deg);
+    }
+
+    60% {
+        transform: translate(2px, 2px);
+        filter: hue-rotate(270deg);
+    }
+
+    80% {
+        transform: translate(2px, -2px);
+        filter: hue-rotate(360deg);
+    }
+
+    100% {
+        transform: translate(0);
+        filter: hue-rotate(0deg);
+    }
+}
+
+@keyframes glitch-static {
+    0% {
+        filter: contrast(100%) brightness(100%);
+    }
+
+    10% {
+        filter: contrast(200%) brightness(150%);
+    }
+
+    20% {
+        filter: contrast(50%) brightness(200%);
+    }
+
+    30% {
+        filter: contrast(300%) brightness(50%);
+    }
+
+    40% {
+        filter: contrast(100%) brightness(300%);
+    }
+
+    50% {
+        filter: contrast(400%) brightness(100%);
+    }
+
+    60% {
+        filter: contrast(100%) brightness(400%);
+    }
+
+    70% {
+        filter: contrast(200%) brightness(100%);
+    }
+
+    80% {
+        filter: contrast(100%) brightness(200%);
+    }
+
+    90% {
+        filter: contrast(150%) brightness(100%);
+    }
+
+    100% {
+        filter: contrast(100%) brightness(100%);
+    }
+}
+
+@keyframes glitch-distort {
+    0% {
+        transform: skew(0deg);
+    }
+
+    20% {
+        transform: skew(2deg, 1deg) scale(1.01);
+    }
+
+    40% {
+        transform: skew(-1deg, 2deg) scale(0.99);
+    }
+
+    60% {
+        transform: skew(1deg, -1deg) scale(1.02);
+    }
+
+    80% {
+        transform: skew(-2deg, 0deg) scale(0.98);
+    }
+
+    100% {
+        transform: skew(0deg) scale(1);
+    }
+}
+
+@keyframes glitch-invert {
+    0% {
+        filter: invert(0);
+    }
+
+    50% {
+        filter: invert(1) hue-rotate(180deg);
+    }
+
+    100% {
+        filter: invert(0);
+    }
+}
+
+/* RGB Split Animations */
+@keyframes glitch-rgb-r {
+    0% {
+        transform: translate(0);
+    }
+
+    33% {
+        transform: translate(2px, -1px);
+    }
+
+    66% {
+        transform: translate(-1px, 2px);
+    }
+
+    100% {
+        transform: translate(0);
+    }
+}
+
+@keyframes glitch-rgb-g {
+    0% {
+        transform: translate(0);
+    }
+
+    33% {
+        transform: translate(-2px, 1px);
+    }
+
+    66% {
+        transform: translate(1px, -2px);
+    }
+
+    100% {
+        transform: translate(0);
+    }
+}
+
+@keyframes glitch-rgb-b {
+    0% {
+        transform: translate(0);
+    }
+
+    33% {
+        transform: translate(1px, 2px);
+    }
+
+    66% {
+        transform: translate(-2px, -1px);
+    }
+
+    100% {
+        transform: translate(0);
+    }
+}
+
+/* Static Noise Background */
+.bg-noise {
+    background-image:
+        radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+    background-size: 4px 4px, 6px 6px, 8px 8px;
+    animation: noise-move 0.1s infinite linear;
+}
+
+@keyframes noise-move {
+    0% {
+        background-position: 0 0, 0 0, 0 0;
+    }
+
+    100% {
+        background-position: 4px 4px, -6px 6px, 8px -8px;
+    }
+}
+
+/* Glitch Lines */
+@keyframes glitch-line-1 {
+    0% {
+        transform: translateX(0);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    20% {
+        transform: translateX(-100%);
+    }
+
+    30% {
+        transform: translateX(100%);
+    }
+
+    40% {
+        transform: translateX(-50%);
+    }
+
+    50% {
+        transform: translateX(0);
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes glitch-line-2 {
+    0% {
+        transform: translateX(0);
+        opacity: 0;
+    }
+
+    15% {
+        opacity: 1;
+    }
+
+    25% {
+        transform: translateX(100%);
+    }
+
+    35% {
+        transform: translateX(-100%);
+    }
+
+    45% {
+        transform: translateX(50%);
+    }
+
+    55% {
+        transform: translateX(0);
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes glitch-line-3 {
+    0% {
+        transform: translateX(0);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    30% {
+        transform: translateX(-50%);
+    }
+
+    40% {
+        transform: translateX(150%);
+    }
+
+    50% {
+        transform: translateX(-25%);
+    }
+
+    60% {
+        transform: translateX(0);
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+/* Reality Crack Effects */
+@keyframes reality-crack {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) rotate(0deg);
+    }
+
+    20% {
+        opacity: 1;
+        transform: scale(1.2) rotate(5deg);
+    }
+
+    40% {
+        transform: scale(0.8) rotate(-3deg);
+    }
+
+    60% {
+        transform: scale(1.1) rotate(2deg);
+    }
+
+    80% {
+        transform: scale(0.9) rotate(-1deg);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+@keyframes crack-draw {
+    0% {
+        stroke-dasharray: 0 100;
+    }
+
+    100% {
+        stroke-dasharray: 100 0;
+    }
+}
+
+@keyframes crack-particle {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(var(--random-x, 20px), var(--random-y, -20px)) scale(0);
+    }
+}
+
+@keyframes reality-ripple {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Text Glitch Effects */
+@keyframes text-glitch {
+    0% {
+        transform: translate(0);
+    }
+
+    20% {
+        transform: translate(-1px, 1px);
+    }
+
+    40% {
+        transform: translate(-1px, -1px);
+    }
+
+    60% {
+        transform: translate(1px, 1px);
+    }
+
+    80% {
+        transform: translate(1px, -1px);
+    }
+
+    100% {
+        transform: translate(0);
+    }
+}
+
+/* Screen Shake */
+@keyframes screen-shake {
+    0% {
+        transform: translate(0);
+    }
+
+    10% {
+        transform: translate(-2px, -1px) rotate(0.5deg);
+    }
+
+    20% {
+        transform: translate(-1px, 2px) rotate(-0.5deg);
+    }
+
+    30% {
+        transform: translate(2px, 1px) rotate(0.5deg);
+    }
+
+    40% {
+        transform: translate(1px, -1px) rotate(-0.5deg);
+    }
+
+    50% {
+        transform: translate(-1px, 2px) rotate(0.5deg);
+    }
+
+    60% {
+        transform: translate(-2px, 1px) rotate(-0.5deg);
+    }
+
+    70% {
+        transform: translate(2px, 1px) rotate(0.5deg);
+    }
+
+    80% {
+        transform: translate(-1px, -1px) rotate(-0.5deg);
+    }
+
+    90% {
+        transform: translate(1px, 2px) rotate(0.5deg);
+    }
+
+    100% {
+        transform: translate(0) rotate(0deg);
+    }
+}
+
+.screen-shake {
+    animation: screen-shake 0.5s ease-in-out;
+}
+
+/* F
+ix markdown list styling issues */
+.prose ul {
+    list-style-position: outside !important;
+    margin-left: 1.5rem !important;
+}
+
+.prose ol {
+    list-style-position: outside !important;
+    margin-left: 1.5rem !important;
+}
+
+.prose li {
+    line-height: 1.6 !important;
+    margin-bottom: 0.5rem !important;
+    padding-left: 0.25rem !important;
+}
+
+.prose li::marker {
+    color: rgba(156, 163, 175, 0.8) !important;
+}
+
+/* Ensure proper alignment for nested lists */
+.prose ul ul,
+.prose ol ol,
+.prose ul ol,
+.prose ol ul {
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+    margin-left: 1.5rem !important;
+}
+
+/* Fix any potential conflicts with glitch effects on lists */
+.prose ul li,
+.prose ol li {
+    position: relative;
+    display: list-item;
+}
+
+/* S
+pecific markdown content styling */
+.markdown-content {
+    line-height: 1.7;
+}
+
+.markdown-content ul {
+    list-style-type: disc;
+    list-style-position: outside;
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.markdown-content ol {
+    list-style-type: decimal;
+    list-style-position: outside;
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.markdown-content li {
+    display: list-item;
+    margin-bottom: 0.5rem;
+    padding-left: 0.25rem;
+    line-height: 1.6;
+    position: relative;
+}
+
+.markdown-content li::marker {
+    color: rgba(156, 163, 175, 0.7);
+    font-size: 0.9em;
+}
+
+/* Ensure nested lists work properly */
+.markdown-content li>ul,
+.markdown-content li>ol {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Fix any potential transform issues that might affect list markers */
+.markdown-content ul,
+.markdown-content ol {
+    transform: none !important;
 }

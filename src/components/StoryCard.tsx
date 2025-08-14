@@ -1,5 +1,8 @@
 import React from 'react';
 import { Story } from '../types';
+import { generateGradientCSS } from '../utils/gradientGenerator';
+import ChaoticText from './ChaoticText';
+import GlitchEffects from './GlitchEffects';
 
 interface StoryCardProps {
     story: Story;
@@ -7,6 +10,13 @@ interface StoryCardProps {
 }
 
 const StoryCard: React.FC<StoryCardProps> = ({ story, onClick }) => {
+    // Generate gradient based on story title + ID for better uniqueness
+    const gradientSeed = `${story.title}-${story.id}`;
+    const gradientCSS = generateGradientCSS(gradientSeed);
+
+    // Debug: Log the gradient for each story
+    console.log(`Story "${story.title}" (ID: ${story.id}) gradient:`, gradientCSS);
+
     return (
         <div
             onClick={onClick}
@@ -20,7 +30,10 @@ const StoryCard: React.FC<StoryCardProps> = ({ story, onClick }) => {
             }}
         >
             {/* Gradient background */}
-            <div className={`absolute inset-0 bg-gradient-to-br ${story.color} opacity-30 group-hover:opacity-40 transition-opacity duration-500`} />
+            <div
+                className="absolute inset-0 opacity-30 group-hover:opacity-40 transition-opacity duration-500"
+                style={{ background: gradientCSS }}
+            />
 
             {/* Large background pattern */}
             <div className="absolute inset-0 opacity-5">
@@ -42,9 +55,13 @@ const StoryCard: React.FC<StoryCardProps> = ({ story, onClick }) => {
             {/* Content - fully centered */}
             <div className="relative h-full flex items-center justify-center p-16">
                 <div className="text-center max-w-4xl">
-                    <h3 className="text-5xl font-bold text-white mb-6 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-300 transition-all duration-500 leading-tight">
-                        {story.title}
-                    </h3>
+                    <GlitchEffects intensity="medium" isActive={true}>
+                        <h3 className="text-5xl font-bold text-white mb-6 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-300 transition-all duration-500 leading-tight">
+                            <ChaoticText glitchChance={0.15} chaosLevel="medium">
+                                {story.title}
+                            </ChaoticText>
+                        </h3>
+                    </GlitchEffects>
                     <p className="text-gray-200 text-lg leading-relaxed mb-8 max-w-2xl mx-auto">
                         {story.excerpt}
                     </p>

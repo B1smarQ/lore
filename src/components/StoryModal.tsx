@@ -2,6 +2,7 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { X } from 'lucide-react';
 import { Story } from '../types';
+import { generateGradientCSS } from '../utils/gradientGenerator';
 
 interface StoryModalProps {
     story: Story | null;
@@ -23,7 +24,10 @@ const StoryModal: React.FC<StoryModalProps> = ({ story, isOpen, onClose }) => {
             {/* Modal */}
             <div className="relative w-full max-w-4xl max-h-[90vh] bg-gray-900 rounded-2xl border border-gray-700 shadow-2xl overflow-hidden">
                 {/* Header */}
-                <div className={`relative p-6 bg-gradient-to-r ${story.color}`}>
+                <div
+                    className="relative p-6"
+                    style={{ background: generateGradientCSS(`${story.title}-${story.id}`) }}
+                >
                     <div className="absolute inset-0 bg-black/40" />
                     <div className="relative flex items-center justify-between">
                         <div>
@@ -54,7 +58,7 @@ const StoryModal: React.FC<StoryModalProps> = ({ story, isOpen, onClose }) => {
 
                 {/* Content */}
                 <div className="p-6 max-h-[60vh] overflow-y-auto">
-                    <div className="prose prose-invert prose-lg max-w-none">
+                    <div className="prose prose-invert prose-lg max-w-none markdown-content">
                         <ReactMarkdown
                             components={{
                                 h1: ({ children }) => (
@@ -88,12 +92,17 @@ const StoryModal: React.FC<StoryModalProps> = ({ story, isOpen, onClose }) => {
                                     </em>
                                 ),
                                 ul: ({ children }) => (
-                                    <ul className="list-disc list-inside text-gray-300 mb-4 space-y-1">
+                                    <ul className="list-disc list-outside ml-6 text-gray-300 mb-4 space-y-2">
                                         {children}
                                     </ul>
                                 ),
+                                ol: ({ children }) => (
+                                    <ol className="list-decimal list-outside ml-6 text-gray-300 mb-4 space-y-2">
+                                        {children}
+                                    </ol>
+                                ),
                                 li: ({ children }) => (
-                                    <li className="text-gray-300">
+                                    <li className="text-gray-300 leading-relaxed pl-1">
                                         {children}
                                     </li>
                                 ),

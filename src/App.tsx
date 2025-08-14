@@ -1,14 +1,20 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { stories } from './data/stories';
 import StoryCard from './components/StoryCard';
 import StoryModal from './components/StoryModal';
 import FloatingElements from './components/FloatingElements';
+import OnboardingOverlay from './components/OnboardingOverlay';
+import EdgePreviews from './components/EdgePreviews';
+import RealityManager from './components/RealityManager';
+import GlitchEffects from './components/GlitchEffects';
 import { Story } from './types';
 
 function App() {
     const [selectedStory, setSelectedStory] = useState<Story | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isScrolling, setIsScrolling] = useState(false);
+    const [_, setIsScrolling] = useState(false);
+    const [showOnboarding, setShowOnboarding] = useState(true);
+    const [currentStoryIndex, setCurrentStoryIndex] = useState(0);
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const scrollTimeoutRef = useRef<number | null>(null);
     const animationFrameRef = useRef<number | null>(null);
@@ -31,6 +37,62 @@ function App() {
         setIsModalOpen(false);
         setSelectedStory(null);
     };
+
+    const handleOnboardingComplete = () => {
+        setShowOnboarding(false);
+        // Store in localStorage to not show again
+        localStorage.setItem('chaos-lore-onboarding-seen', 'true');
+    };
+
+    const handleEdgeNavigation = (direction: 'prev' | 'next') => {
+        if (!scrollContainerRef.current) return;
+
+        const containerWidth = scrollContainerRef.current.clientWidth;
+        const newIndex = direction === 'prev'
+            ? Math.max(0, currentStoryIndex - 1)
+            : Math.min(stories.length - 1, currentStoryIndex + 1);
+
+        if (newIndex !== currentStoryIndex) {
+            // Use the smooth snap animation
+            snapStartTimeRef.current = Date.now();
+            snapStartPositionRef.current = scrollContainerRef.current.scrollLeft;
+            targetScrollLeftRef.current = newIndex * containerWidth;
+            currentScrollLeftRef.current = snapStartPositionRef.current;
+            isSnappingRef.current = true;
+            isAnimatingRef.current = true;
+            snapDurationRef.current = 600;
+
+            smoothScroll();
+            setCurrentStoryIndex(newIndex);
+        }
+    };
+
+    // Check if user has seen onboarding before
+    useEffect(() => {
+        const hasSeenOnboarding = localStorage.getItem('chaos-lore-onboarding-seen');
+        if (hasSeenOnboarding) {
+            setShowOnboarding(false);
+        }
+    }, []);
+
+    // Track current story index based on scroll position
+    useEffect(() => {
+        const updateCurrentIndex = () => {
+            if (scrollContainerRef.current) {
+                const containerWidth = scrollContainerRef.current.clientWidth;
+                const newIndex = Math.round(scrollContainerRef.current.scrollLeft / containerWidth);
+                if (newIndex !== currentStoryIndex && newIndex >= 0 && newIndex < stories.length) {
+                    setCurrentStoryIndex(newIndex);
+                }
+            }
+        };
+
+        const container = scrollContainerRef.current;
+        if (container) {
+            container.addEventListener('scroll', updateCurrentIndex);
+            return () => container.removeEventListener('scroll', updateCurrentIndex);
+        }
+    }, [currentStoryIndex]);
 
     // Easing function for smooth snapping
     const easeOutCubic = (t: number): number => {
@@ -206,84 +268,106 @@ function App() {
     }, [isModalOpen]);
 
     return (
-        <div className="h-screen bg-gray-900 relative overflow-hidden">
-            <FloatingElements />
+        <RealityManager chaosLevel="medium">
+            <div className="h-screen bg-gray-900 relative overflow-hidden">
+                <FloatingElements />
 
-            {/* Minimal header - top left corner only */}
-            <div className="absolute top-6 left-6 z-30 pointer-events-none">
-                <h1 className="text-2xl font-bold">
-                    <span className="chaos-gradient bg-clip-text text-transparent">
-                        Chaos Lore
-                    </span>
-                </h1>
-            </div>
+                {/* Onboarding Overlay */}
+                <OnboardingOverlay
+                    isVisible={showOnboarding}
+                    onComplete={handleOnboardingComplete}
+                />
 
-            {/* Stories Section - Full screen episodes */}
-            <main className="relative z-10 h-full">
-                <div
-                    ref={scrollContainerRef}
-                    className="flex h-full overflow-x-auto scrollbar-hide horizontal-scroll"
-                    style={{ scrollBehavior: 'auto' }}
-                >
-                    {stories.map((story, index) => (
-                        <div key={story.id} className="story-container story-blend" data-story-index={index}>
-                            <StoryCard
-                                story={story}
-                                onClick={() => handleStoryClick(story)}
-                            />
-                        </div>
-                    ))}
+                {/* Edge Previews */}
+                {!showOnboarding && !isModalOpen && (
+                    <EdgePreviews
+                        currentIndex={currentStoryIndex}
+                        stories={stories}
+                        onNavigate={handleEdgeNavigation}
+                    />
+                )}
+
+                {/* Minimal header - top left corner only */}
+                <div className="absolute top-6 left-6 z-30 pointer-events-none">
+                    <GlitchEffects intensity="low" isActive={!showOnboarding}>
+                        <h1 className="text-2xl font-bold">
+                            <span className="chaos-gradient bg-clip-text text-transparent">
+                                Chaos Lore
+                            </span>
+                        </h1>
+                    </GlitchEffects>
                 </div>
 
-                {/* Navigation dots */}
-                <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-3 z-30 pointer-events-auto">
-                    {stories.map((_, index) => (
-                        <button
-                            key={index}
-                            className="w-4 h-4 rounded-full bg-white/30 hover:bg-white/60 transition-colors duration-300 cursor-pointer border border-white/20 hover:border-white/40"
-                            onClick={() => {
-                                if (scrollContainerRef.current) {
-                                    const containerWidth = scrollContainerRef.current.clientWidth;
-                                    const snapTarget = index * containerWidth;
+                {/* Stories Section - Full screen episodes */}
+                <main className="relative z-10 h-full">
+                    <div
+                        ref={scrollContainerRef}
+                        className="flex h-full overflow-x-auto scrollbar-hide horizontal-scroll"
+                        style={{ scrollBehavior: 'auto' }}
+                    >
+                        {stories.map((story, index) => (
+                            <div key={story.id} className="story-container story-blend" data-story-index={index}>
+                                <StoryCard
+                                    story={story}
+                                    onClick={() => handleStoryClick(story)}
+                                />
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Navigation dots */}
+                    <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-3 z-30 pointer-events-auto">
+                        {stories.map((_, index) => (
+                            <button
+                                key={index}
+                                className={`w-4 h-4 rounded-full transition-all duration-300 cursor-pointer border ${index === currentStoryIndex
+                                    ? 'bg-white border-white/60 scale-125'
+                                    : 'bg-white/30 hover:bg-white/60 border-white/20 hover:border-white/40'
+                                    }`}
+                                onClick={() => {
+                                    if (scrollContainerRef.current) {
+                                        const containerWidth = scrollContainerRef.current.clientWidth;
+                                        const snapTarget = index * containerWidth;
 
 
 
-                                    // Cancel any existing animation
-                                    if (animationFrameRef.current) {
-                                        cancelAnimationFrame(animationFrameRef.current);
+                                        // Cancel any existing animation
+                                        if (animationFrameRef.current) {
+                                            cancelAnimationFrame(animationFrameRef.current);
+                                        }
+
+                                        // Initialize smooth snap animation using the main system
+                                        snapStartTimeRef.current = Date.now();
+                                        snapStartPositionRef.current = scrollContainerRef.current.scrollLeft;
+                                        targetScrollLeftRef.current = snapTarget;
+                                        currentScrollLeftRef.current = snapStartPositionRef.current;
+                                        isSnappingRef.current = true;
+                                        isAnimatingRef.current = true;
+                                        snapDurationRef.current = 600; // Faster for direct navigation
+
+                                        smoothScroll();
                                     }
+                                }}
+                            />
+                        ))}
+                    </div>
 
-                                    // Initialize smooth snap animation using the main system
-                                    snapStartTimeRef.current = Date.now();
-                                    snapStartPositionRef.current = scrollContainerRef.current.scrollLeft;
-                                    targetScrollLeftRef.current = snapTarget;
-                                    currentScrollLeftRef.current = snapStartPositionRef.current;
-                                    isSnappingRef.current = true;
-                                    isAnimatingRef.current = true;
-                                    snapDurationRef.current = 600; // Faster for direct navigation
+                    {/* Scroll hint */}
+                    <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-30 pointer-events-none">
+                        <p className="text-white/60 text-sm text-center">
+                            Use mouse wheel or click dots to explore episodes
+                        </p>
+                    </div>
+                </main>
 
-                                    smoothScroll();
-                                }
-                            }}
-                        />
-                    ))}
-                </div>
-
-                {/* Scroll hint */}
-                <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-30 pointer-events-none">
-                    <p className="text-white/60 text-sm text-center">
-                        Use mouse wheel or click dots to explore episodes
-                    </p>
-                </div>
-            </main>
-
-            {/* Story Modal */}
-            <StoryModal
-                story={selectedStory}
-                isOpen={isModalOpen}
-                onClose={handleCloseModal}
-            />
-        </div>
+                {/* Story Modal */}
+                <StoryModal
+                    story={selectedStory}
+                    isOpen={isModalOpen}
+                    onClose={handleCloseModal}
+                />
+            </div>
+        </RealityManager>
     );
 }
 
