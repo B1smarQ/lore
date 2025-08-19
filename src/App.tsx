@@ -15,6 +15,7 @@ function App() {
     const [_, setIsScrolling] = useState(false);
     const [showOnboarding, setShowOnboarding] = useState(true);
     const [currentStoryIndex, setCurrentStoryIndex] = useState(0);
+    const dotsContainerRef = useRef<HTMLDivElement>(null);
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const scrollTimeoutRef = useRef<number | null>(null);
     const animationFrameRef = useRef<number | null>(null);
@@ -75,6 +76,24 @@ function App() {
         }
     }, []);
 
+    // Function to scroll dots container to keep active dot visible
+    const scrollDotsToActive = (index: number) => {
+        if (dotsContainerRef.current) {
+            const dotWidth = 16; // Approximate width including gap
+            const containerWidth = dotsContainerRef.current.clientWidth;
+            const scrollLeft = dotsContainerRef.current.scrollLeft;
+            const dotPosition = index * dotWidth;
+
+            // Check if dot is outside visible area
+            if (dotPosition < scrollLeft || dotPosition > scrollLeft + containerWidth - dotWidth) {
+                dotsContainerRef.current.scrollTo({
+                    left: Math.max(0, dotPosition - containerWidth / 2),
+                    behavior: 'smooth'
+                });
+            }
+        }
+    };
+
     // Track current story index based on scroll position
     useEffect(() => {
         const updateCurrentIndex = () => {
@@ -83,6 +102,7 @@ function App() {
                 const newIndex = Math.round(scrollContainerRef.current.scrollLeft / containerWidth);
                 if (newIndex !== currentStoryIndex && newIndex >= 0 && newIndex < stories.length) {
                     setCurrentStoryIndex(newIndex);
+                    scrollDotsToActive(newIndex);
                 }
             }
         };
@@ -130,6 +150,45 @@ function App() {
                 scrollContainerRef.current.scrollLeft = targetScrollLeftRef.current;
             }
         }
+    };
+
+    // Touch handling for mobile swipe
+    const touchStartRef = useRef<{ x: number; y: number } | null>(null);
+    const touchEndRef = useRef<{ x: number; y: number } | null>(null);
+
+    const handleTouchStart = (e: React.TouchEvent) => {
+        touchStartRef.current = {
+            x: e.touches[0].clientX,
+            y: e.touches[0].clientY
+        };
+    };
+
+    const handleTouchMove = (e: React.TouchEvent) => {
+        touchEndRef.current = {
+            x: e.touches[0].clientX,
+            y: e.touches[0].clientY
+        };
+    };
+
+    const handleTouchEnd = () => {
+        if (!touchStartRef.current || !touchEndRef.current) return;
+
+        const deltaX = touchStartRef.current.x - touchEndRef.current.x;
+        const deltaY = touchStartRef.current.y - touchEndRef.current.y;
+
+        // Only handle horizontal swipes (ignore vertical scrolling)
+        if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
+            if (deltaX > 0 && currentStoryIndex < stories.length - 1) {
+                // Swipe left - go to next story
+                handleEdgeNavigation('next');
+            } else if (deltaX < 0 && currentStoryIndex > 0) {
+                // Swipe right - go to previous story
+                handleEdgeNavigation('prev');
+            }
+        }
+
+        touchStartRef.current = null;
+        touchEndRef.current = null;
     };
 
     // Handle horizontal scroll with mouse wheel and keyboard
@@ -287,12 +346,13 @@ function App() {
                     />
                 )}
 
-                {/* Minimal header - top left corner only */}
-                <div className="absolute top-6 left-6 z-30 pointer-events-none">
+                {/* Responsive header */}
+                <div className="absolute top-4 sm:top-6 left-4 sm:left-6 z-30 pointer-events-none">
                     <GlitchEffects intensity="low" isActive={!showOnboarding}>
-                        <h1 className="text-2xl font-bold">
+                        <h1 className="text-lg sm:text-xl md:text-2xl font-bold">
                             <span className="chaos-gradient bg-clip-text text-transparent">
-                                Chaos Lore
+                                <span className="hidden sm:inline">Chaos Lore</span>
+                                <span className="sm:hidden">Chaos</span>
                             </span>
                         </h1>
                     </GlitchEffects>
@@ -304,6 +364,9 @@ function App() {
                         ref={scrollContainerRef}
                         className="flex h-full overflow-x-auto scrollbar-hide horizontal-scroll"
                         style={{ scrollBehavior: 'auto' }}
+                        onTouchStart={handleTouchStart}
+                        onTouchMove={handleTouchMove}
+                        onTouchEnd={handleTouchEnd}
                     >
                         {stories.map((story, index) => (
                             <div key={story.id} className="story-container story-blend" data-story-index={index}>
@@ -315,47 +378,55 @@ function App() {
                         ))}
                     </div>
 
-                    {/* Navigation dots */}
-                    <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-3 z-30 pointer-events-auto">
-                        {stories.map((_, index) => (
-                            <button
-                                key={index}
-                                className={`w-4 h-4 rounded-full transition-all duration-300 cursor-pointer border ${index === currentStoryIndex
-                                    ? 'bg-white border-white/60 scale-125'
-                                    : 'bg-white/30 hover:bg-white/60 border-white/20 hover:border-white/40'
-                                    }`}
-                                onClick={() => {
-                                    if (scrollContainerRef.current) {
-                                        const containerWidth = scrollContainerRef.current.clientWidth;
-                                        const snapTarget = index * containerWidth;
+                    {/* Navigation dots - scrollable */}
+                    <div className="absolute bottom-4 sm:bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 z-30 pointer-events-auto">
+                        <div className="max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
+                            <div
+                                ref={dotsContainerRef}
+                                className="dots-container flex gap-3 sm:gap-4 overflow-x-auto scrollbar-hide px-4 py-2 -mx-4"
+                            >
+                                {stories.map((_, index) => (
+                                    <button
+                                        key={index}
+                                        className={`navigation-dot flex-shrink-0 w-3 sm:w-4 h-3 sm:h-4 rounded-full cursor-pointer ${index === currentStoryIndex
+                                            ? 'bg-white scale-125'
+                                            : 'bg-white/30 hover:bg-white/60'
+                                            }`}
+                                        onClick={() => {
+                                            if (scrollContainerRef.current) {
+                                                const containerWidth = scrollContainerRef.current.clientWidth;
+                                                const snapTarget = index * containerWidth;
+
+                                                // Cancel any existing animation
+                                                if (animationFrameRef.current) {
+                                                    cancelAnimationFrame(animationFrameRef.current);
+                                                }
+
+                                                // Initialize smooth snap animation using the main system
+                                                snapStartTimeRef.current = Date.now();
+                                                snapStartPositionRef.current = scrollContainerRef.current.scrollLeft;
+                                                targetScrollLeftRef.current = snapTarget;
+                                                currentScrollLeftRef.current = snapStartPositionRef.current;
+                                                isSnappingRef.current = true;
+                                                isAnimatingRef.current = true;
+                                                snapDurationRef.current = 600; // Faster for direct navigation
+
+                                                smoothScroll();
+                                            }
+                                        }}
+                                    />
+                                ))}
+                            </div>
+                        </div>
 
 
-
-                                        // Cancel any existing animation
-                                        if (animationFrameRef.current) {
-                                            cancelAnimationFrame(animationFrameRef.current);
-                                        }
-
-                                        // Initialize smooth snap animation using the main system
-                                        snapStartTimeRef.current = Date.now();
-                                        snapStartPositionRef.current = scrollContainerRef.current.scrollLeft;
-                                        targetScrollLeftRef.current = snapTarget;
-                                        currentScrollLeftRef.current = snapStartPositionRef.current;
-                                        isSnappingRef.current = true;
-                                        isAnimatingRef.current = true;
-                                        snapDurationRef.current = 600; // Faster for direct navigation
-
-                                        smoothScroll();
-                                    }
-                                }}
-                            />
-                        ))}
                     </div>
 
-                    {/* Scroll hint */}
-                    <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-30 pointer-events-none">
-                        <p className="text-white/60 text-sm text-center">
-                            Use mouse wheel or click dots to explore episodes
+                    {/* Scroll hint - responsive */}
+                    <div className="absolute bottom-16 sm:bottom-20 left-1/2 transform -translate-x-1/2 z-30 pointer-events-none">
+                        <p className="text-white/60 text-xs sm:text-sm text-center px-4">
+                            <span className="hidden sm:inline">Use mouse wheel or click dots to explore episodes</span>
+                            <span className="sm:hidden">Swipe or tap dots to explore</span>
                         </p>
                     </div>
                 </main>

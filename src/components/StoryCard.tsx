@@ -47,30 +47,34 @@ const StoryCard: React.FC<StoryCardProps> = ({ story, onClick }) => {
             <div className="absolute top-1/2 right-1/3 w-4 h-4 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 animate-pulse opacity-50" />
             <div className="absolute top-1/3 left-1/2 w-5 h-5 rounded-full bg-gradient-to-r from-green-400 to-emerald-500 animate-float opacity-60" style={{ animationDelay: '2s' }} />
 
-            {/* Episode indicator - top right corner */}
-            <div className="absolute top-8 right-8 px-4 py-2 bg-black/40 backdrop-blur-sm rounded-full border border-white/20">
-                <span className="text-white/80 text-sm font-medium">Episode {story.id}</span>
+            {/* Episode indicator - responsive positioning */}
+            <div className="absolute top-4 sm:top-6 md:top-8 right-4 sm:right-6 md:right-8 px-3 sm:px-4 py-1 sm:py-2 bg-black/40 backdrop-blur-sm rounded-full border border-white/20">
+                <span className="text-white/80 text-xs sm:text-sm font-medium">
+                    <span className="hidden sm:inline">Episode </span>
+                    <span className="sm:hidden">Ep </span>
+                    {story.id}
+                </span>
             </div>
 
-            {/* Content - fully centered */}
-            <div className="relative h-full flex items-center justify-center p-16">
-                <div className="text-center max-w-4xl">
+            {/* Content - responsive centered */}
+            <div className="relative h-full flex items-center justify-center p-4 sm:p-8 md:p-12 lg:p-16">
+                <div className="text-center max-w-4xl w-full px-4">
                     <GlitchEffects intensity="medium" isActive={true}>
-                        <h3 className="text-5xl font-bold text-white mb-6 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-300 transition-all duration-500 leading-tight">
+                        <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 sm:mb-6 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-300 transition-all duration-500 leading-tight">
                             <ChaoticText glitchChance={0.15} chaosLevel="medium">
                                 {story.title}
                             </ChaoticText>
                         </h3>
                     </GlitchEffects>
-                    <p className="text-gray-200 text-lg leading-relaxed mb-8 max-w-2xl mx-auto">
+                    <p className="text-gray-200 text-sm sm:text-base md:text-lg leading-relaxed mb-6 sm:mb-8 max-w-2xl mx-auto">
                         {story.excerpt}
                     </p>
 
-                    <div className="flex flex-wrap gap-3 justify-center mb-8">
+                    <div className="flex flex-wrap gap-2 sm:gap-3 justify-center mb-6 sm:mb-8">
                         {story.tags.map((tag, index) => (
                             <span
                                 key={index}
-                                className="px-4 py-2 text-sm bg-white/10 text-white rounded-full border border-white/20 backdrop-blur-sm group-hover:bg-white/20 group-hover:border-white/30 transition-all duration-300"
+                                className="px-3 sm:px-4 py-1 sm:py-2 text-xs sm:text-sm bg-white/10 text-white rounded-full border border-white/20 backdrop-blur-sm group-hover:bg-white/20 group-hover:border-white/30 transition-all duration-300"
                             >
                                 {tag}
                             </span>
@@ -79,9 +83,12 @@ const StoryCard: React.FC<StoryCardProps> = ({ story, onClick }) => {
 
                     {/* Click to read indicator */}
                     <div className="opacity-60 group-hover:opacity-100 transition-opacity duration-300">
-                        <p className="text-white/80 text-base">Click to read the story</p>
-                        <div className="mt-3 w-10 h-10 mx-auto border-2 border-white/40 rounded-full flex items-center justify-center animate-pulse">
-                            <div className="w-0 h-0 border-l-4 border-l-white/60 border-t-2 border-t-transparent border-b-2 border-b-transparent ml-1"></div>
+                        <p className="text-white/80 text-sm sm:text-base">
+                            <span className="hidden sm:inline">Click to read the story</span>
+                            <span className="sm:hidden">Tap to read</span>
+                        </p>
+                        <div className="mt-2 sm:mt-3 w-8 sm:w-10 h-8 sm:h-10 mx-auto border-2 border-white/40 rounded-full flex items-center justify-center animate-pulse">
+                            <div className="w-0 h-0 border-l-3 sm:border-l-4 border-l-white/60 border-t-1.5 sm:border-t-2 border-t-transparent border-b-1.5 sm:border-b-2 border-b-transparent ml-0.5 sm:ml-1"></div>
                         </div>
                     </div>
                 </div>

@@ -688,3 +688,120 @@ pecific markdown content styling */
 .markdown-content ol {
     transform: none !important;
 }
+
+/* Mobile-specific improvements */
+@media (max-width: 640px) {
+
+    /* Prevent text selection on mobile for better UX */
+    .story-container {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    /* Improve touch targets */
+    button {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    /* Better text rendering on mobile */
+    body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+    }
+
+    /* Prevent zoom on input focus */
+    input,
+    select,
+    textarea {
+        font-size: 16px;
+    }
+
+    /* Smooth scrolling for mobile */
+    .horizontal-scroll {
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+    }
+
+    /* Reduce glitch intensity on mobile for performance */
+    .glitch-rgb,
+    .glitch-static,
+    .glitch-distort {
+        animation-duration: 0.2s;
+    }
+}
+
+/* Tablet-specific adjustments */
+@media (min-width: 641px) and (max-width: 1024px) {
+
+    /* Slightly larger touch targets for tablets */
+    button {
+        min-height: 48px;
+        min-width: 48px;
+    }
+}
+
+/* Line clamp utility for long titles */
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Responsive text utilities */
+@media (max-width: 640px) {
+    .text-responsive-title {
+        font-size: clamp(1.5rem, 8vw, 3rem);
+        line-height: 1.1;
+    }
+}
+
+/* 
+Navigation dots scrolling improvements */
+.dots-container {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Hide scrollbar for dots but keep functionality */
+.dots-container::-webkit-scrollbar {
+    display: none;
+}
+
+.dots-container {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Improve dot visibility and interaction */
+@media (max-width: 640px) {
+    .navigation-dot {
+        min-width: 12px;
+        min-height: 12px;
+    }
+
+    /* Add more spacing on mobile for easier tapping */
+    .dots-container {
+        gap: 0.75rem;
+    }
+}
+
+/* Smooth transitions for dot scaling */
+.navigation-dot {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navigation-dot:active {
+    transform: scale(0.9);
+}
+
+/* Gradient fade indicators for scrollable dots */
+.dots-fade-left,
+.dots-fade-right {
+    pointer-events: none;
+    z-index: 1;
+}

@@ -887,6 +887,65 @@ That night:
 
 
         `
+    },
+    {
+        id: "10",
+        title: "Et Tu, Jester?",
+        tags: ["Caesar", "Rome"],
+        content: `
+# Et Tu, Jester?
+
+## Act I: The Ides of LOL
+
+The Roman Senate was in session. Senators bickered. Caesar brooded. The air smelled of wine, ambition, and poor life choices.
+
+Then - a firework exploded in the sacred halls.
+
+Confetti rained down as a figure in a patched toga backflipped onto the podium, kicking over a bust of Cato.
+
+"Salve, suckers!" The Jester grinned, adjusting a laurel wreath crookedly on his head. "Let’s liven this place up!"
+
+Cicero dropped his scroll. "By Jupiter’s beard - WHO ARE YOU?!"
+
+The Jester gasped. "Who am I? Who are YOU? Actually, scratch that - let’s vote on it!"
+
+He snapped his fingers.
+
+## Act II: The Senate Descends into Madness
+
+* All speeches were auto-tuned into sea shanties.
+
+* The Roman eagles mutated into parrots that only squawked "YOLO."
+
+* Brutus’ dagger turned into a baguette mid-assassination attempt.
+
+* Caesar’s famous last words? "Et tu, Jester?" before getting pied in the face.
+
+Pompey stood, trembling. "**This is an outrage! Rome is-**"
+
+"BORING!" The Jester declared, replacing the Senate floor with a bouncy castle. "Let’s fix that."
+
+He pulled out THE FINAL LAUGH and fired.
+
+## Act III: The Second Roman Empire
+
+The aftermath:
+
+* The Colosseum now hosts stand-up comedy instead of gladiator fights.
+
+* Latin is replaced with meme hieroglyphics.
+
+* Roads? Still lead to Rome, but Rome is now a taco truck.
+
+* Augustus’ reign is retconned into a failed improv show.
+
+* The Jester, now self-appointed Emperor for Life, lounged on a throne of stolen dignity.
+
+"Best. Empire. Ever."
+
+*Somewhere, a single white flower grew in the ruins of the Forum. It was flipping off the sunset.*
+
+        `
     }
 
 
