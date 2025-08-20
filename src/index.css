@@ -4,7 +4,8 @@
 
 @layer base {
     body {
-        @apply bg-gray-900 text-white overflow-hidden;
+        @apply bg-black text-gray-100 overflow-hidden;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     }
 
     html {
@@ -71,24 +72,24 @@
         content: '';
         position: absolute;
         top: 0;
-        left: -50px;
-        width: 100px;
+        left: -12px;
+        width: 24px;
         height: 100%;
-        background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.1), transparent);
+        background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.06), transparent);
         pointer-events: none;
-        z-index: 1;
+        z-index: 0;
     }
 
     .story-blend::after {
         content: '';
         position: absolute;
         top: 0;
-        right: -50px;
-        width: 100px;
+        right: -12px;
+        width: 24px;
         height: 100%;
-        background: linear-gradient(to left, transparent, rgba(0, 0, 0, 0.1), transparent);
+        background: linear-gradient(to left, transparent, rgba(0, 0, 0, 0.06), transparent);
         pointer-events: none;
-        z-index: 1;
+        z-index: 0;
     }
 
     /* Onboarding animations */

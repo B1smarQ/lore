@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Story } from '../types';
 import { generateGradientCSS } from '../utils/gradientGenerator';
 import ChaoticText from './ChaoticText';
@@ -17,17 +17,45 @@ const StoryCard: React.FC<StoryCardProps> = ({ story, onClick }) => {
     // Debug: Log the gradient for each story
     console.log(`Story "${story.title}" (ID: ${story.id}) gradient:`, gradientCSS);
 
+    const excerpt = story.excerpt ?? 'Open to read the full story.';
+
+    const rootRef = useRef<HTMLDivElement>(null);
+    const rafRef = useRef<number | null>(null);
+
+    const setMouseVars = (x: number, y: number) => {
+        if (!rootRef.current) return;
+        rootRef.current.style.setProperty('--mx', String(x));
+        rootRef.current.style.setProperty('--my', String(y));
+    };
+
+    useEffect(() => {
+        setMouseVars(0.5, 0.5);
+        return () => {
+            if (rafRef.current) cancelAnimationFrame(rafRef.current);
+        };
+    }, []);
+
+    const handleMouseMove = (e: React.MouseEvent) => {
+        if (!rootRef.current) return;
+        const rect = rootRef.current.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = (e.clientY - rect.top) / rect.height;
+        if (rafRef.current) cancelAnimationFrame(rafRef.current);
+        rafRef.current = requestAnimationFrame(() => setMouseVars(x, y));
+    };
+
+    const handleMouseLeave = () => {
+        if (rafRef.current) cancelAnimationFrame(rafRef.current);
+        rafRef.current = requestAnimationFrame(() => setMouseVars(0.5, 0.5));
+    };
+
     return (
         <div
+            ref={rootRef}
             onClick={onClick}
-            className="group relative w-screen h-screen flex-shrink-0 bg-gray-800 overflow-hidden cursor-pointer transform transition-all duration-500 hover:scale-[1.02]"
-            style={{
-                background: `linear-gradient(90deg, 
-                    rgba(31, 41, 55, 0.8) 0%, 
-                    rgb(31, 41, 55) 5%, 
-                    rgb(31, 41, 55) 95%, 
-                    rgba(31, 41, 55, 0.8) 100%)`
-            }}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            className="group relative w-screen h-screen flex-shrink-0 bg-black overflow-hidden cursor-pointer"
         >
             {/* Gradient background */}
             <div
@@ -37,64 +65,76 @@ const StoryCard: React.FC<StoryCardProps> = ({ story, onClick }) => {
 
             {/* Large background pattern */}
             <div className="absolute inset-0 opacity-5">
-                <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-white blur-3xl animate-pulse-slow" />
-                <div className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-white blur-3xl animate-float" />
+                <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-white blur-3xl animate-pulse-slow" style={{ transform: 'translate(calc((var(--mx, 0.5) - 0.5) * 40px), calc((var(--my, 0.5) - 0.5) * 40px))' }} />
+                <div className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-white blur-3xl animate-float" style={{ transform: 'translate(calc((var(--mx, 0.5) - 0.5) * -30px), calc((var(--my, 0.5) - 0.5) * -30px))' }} />
             </div>
 
             {/* Random color splashes - larger and more prominent */}
-            <div className="absolute top-20 right-20 w-8 h-8 rounded-full bg-gradient-to-r from-pink-500 to-violet-500 animate-pulse-slow opacity-60" />
-            <div className="absolute bottom-32 left-20 w-6 h-6 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 animate-float opacity-70" />
-            <div className="absolute top-1/2 right-1/3 w-4 h-4 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 animate-pulse opacity-50" />
-            <div className="absolute top-1/3 left-1/2 w-5 h-5 rounded-full bg-gradient-to-r from-green-400 to-emerald-500 animate-float opacity-60" style={{ animationDelay: '2s' }} />
+            <div className="absolute top-20 right-20 w-8 h-8 rounded-full bg-gradient-to-r from-pink-500 to-violet-500 animate-pulse-slow opacity-60" style={{ transform: 'translate(calc((var(--mx, 0.5) - 0.5) * 20px), calc((var(--my, 0.5) - 0.5) * 20px))' }} />
+            <div className="absolute bottom-32 left-20 w-6 h-6 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 animate-float opacity-70" style={{ transform: 'translate(calc((var(--mx, 0.5) - 0.5) * -16px), calc((var(--my, 0.5) - 0.5) * 16px))' }} />
+            <div className="absolute top-1/2 right-1/3 w-4 h-4 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 animate-pulse opacity-50" style={{ transform: 'translate(calc((var(--mx, 0.5) - 0.5) * 14px), calc((var(--my, 0.5) - 0.5) * -14px))' }} />
+            <div className="absolute top-1/3 left-1/2 w-5 h-5 rounded-full bg-gradient-to-r from-green-400 to-emerald-500 animate-float opacity-60" style={{ animationDelay: '2s', transform: 'translate(calc((var(--mx, 0.5) - 0.5) * -12px), calc((var(--my, 0.5) - 0.5) * 12px))' }} />
 
-            {/* Episode indicator - responsive positioning */}
-            <div className="absolute top-4 sm:top-6 md:top-8 right-4 sm:right-6 md:right-8 px-3 sm:px-4 py-1 sm:py-2 bg-black/40 backdrop-blur-sm rounded-full border border-white/20">
-                <span className="text-white/80 text-xs sm:text-sm font-medium">
-                    <span className="hidden sm:inline">Episode </span>
-                    <span className="sm:hidden">Ep </span>
-                    {story.id}
-                </span>
-            </div>
 
-            {/* Content - responsive centered */}
-            <div className="relative h-full flex items-center justify-center p-4 sm:p-8 md:p-12 lg:p-16">
-                <div className="text-center max-w-4xl w-full px-4">
-                    <GlitchEffects intensity="medium" isActive={true}>
-                        <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 sm:mb-6 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-300 transition-all duration-500 leading-tight">
-                            <ChaoticText glitchChance={0.15} chaosLevel="medium">
-                                {story.title}
-                            </ChaoticText>
-                        </h3>
-                    </GlitchEffects>
-                    <p className="text-gray-200 text-sm sm:text-base md:text-lg leading-relaxed mb-6 sm:mb-8 max-w-2xl mx-auto">
-                        {story.excerpt}
-                    </p>
 
-                    <div className="flex flex-wrap gap-2 sm:gap-3 justify-center mb-6 sm:mb-8">
-                        {story.tags.map((tag, index) => (
-                            <span
-                                key={index}
-                                className="px-3 sm:px-4 py-1 sm:py-2 text-xs sm:text-sm bg-white/10 text-white rounded-full border border-white/20 backdrop-blur-sm group-hover:bg-white/20 group-hover:border-white/30 transition-all duration-300"
-                            >
-                                {tag}
+            {/* Modern content layout */}
+            <div className="relative h-full flex flex-col justify-center p-6 sm:p-10 md:p-12 z-10">
+                <div className="mx-auto w-full max-w-4xl">
+                    <div className="backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl p-6 sm:p-10 shadow-2xl"
+                        style={{
+                            transform: 'perspective(1000px) rotateY(calc((var(--mx, 0.5) - 0.5) * 8deg)) rotateX(calc((0.5 - var(--my, 0.5)) * 6deg))',
+                            willChange: 'transform',
+                            transition: 'transform 0.06s ease'
+                        }}
+                    >
+                        {/* Episode number */}
+                        <div className="mb-4 sm:mb-6">
+                            <span className="text-xs sm:text-sm font-mono text-gray-500 tracking-wider">
+                                EPISODE {String(story.id).padStart(2, '0')}
                             </span>
-                        ))}
-                    </div>
+                        </div>
 
-                    {/* Click to read indicator */}
-                    <div className="opacity-60 group-hover:opacity-100 transition-opacity duration-300">
-                        <p className="text-white/80 text-sm sm:text-base">
-                            <span className="hidden sm:inline">Click to read the story</span>
-                            <span className="sm:hidden">Tap to read</span>
+                        {/* Title */}
+                        <GlitchEffects intensity="low" isActive={true}>
+                            <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-white mb-4 sm:mb-6 leading-tight tracking-tight">
+                                <ChaoticText glitchChance={0.05} chaosLevel="low">
+                                    {story.title}
+                                </ChaoticText>
+                            </h3>
+                        </GlitchEffects>
+
+                        {/* Excerpt */}
+                        <p className="text-gray-300 text-base sm:text-lg leading-relaxed mb-6 sm:mb-8 max-w-3xl font-light">
+                            {excerpt}
                         </p>
-                        <div className="mt-2 sm:mt-3 w-8 sm:w-10 h-8 sm:h-10 mx-auto border-2 border-white/40 rounded-full flex items-center justify-center animate-pulse">
-                            <div className="w-0 h-0 border-l-3 sm:border-l-4 border-l-white/60 border-t-1.5 sm:border-t-2 border-t-transparent border-b-1.5 sm:border-b-2 border-b-transparent ml-0.5 sm:ml-1"></div>
+
+                        {/* Tags */}
+                        <div className="flex flex-wrap gap-2 sm:gap-3 mb-6 sm:mb-8">
+                            {story.tags.map((tag, index) => (
+                                <span
+                                    key={index}
+                                    className="px-3 py-1.5 text-xs font-mono text-gray-300 bg-white/5 border border-white/10 rounded-md hover:bg-white/10 hover:border-white/20 transition-all duration-300"
+                                >
+                                    {tag.toUpperCase()}
+                                </span>
+                            ))}
+                        </div>
+                        {/* CTA */}
+                        <div className="flex items-center gap-4">
+                            <button
+                                type="button"
+                                aria-label={`Read ${story.title}`}
+                                className="px-4 py-2 rounded-md bg-white/10 border border-white/15 hover:bg-white/15 hover:border-white/25 transition-colors"
+                            >
+                                Read story
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
 
             {/* Hover effect overlay */}
+            <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(400px circle at calc(var(--mx, 0.5) * 100%) calc(var(--my, 0.5) * 100%), rgba(255,255,255,0.08), transparent 60%)', mixBlendMode: 'screen' }} />
             <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         </div>
     );
