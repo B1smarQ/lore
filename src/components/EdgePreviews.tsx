@@ -17,12 +17,12 @@ const EdgePreviews: React.FC<EdgePreviewsProps> = ({ currentIndex, stories, onNa
         <>
             {/* Left Edge Preview - responsive */}
             {prevStory && (
-                <div className="fixed left-0 top-0 h-full w-16 sm:w-24 md:w-32 z-20 pointer-events-none">
+                <div className="fixed left-0 top-0 h-full w-10 sm:w-16 md:w-24 z-10 pointer-events-none">
                     {/* Gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/20 to-transparent" />
 
                     {/* Preview content */}
-                    <div className="absolute inset-0 opacity-30 hover:opacity-60 transition-opacity duration-300">
+                    <div className="absolute inset-0 opacity-20 hover:opacity-40 transition-opacity duration-300">
                         <div
                             className="h-full opacity-40"
                             style={{ background: generateGradientCSS(`${prevStory.title}-${prevStory.id}`) }}
@@ -43,7 +43,7 @@ const EdgePreviews: React.FC<EdgePreviewsProps> = ({ currentIndex, stories, onNa
                     {/* Navigation button */}
                     <button
                         onClick={() => onNavigate('prev')}
-                        className="absolute left-2 sm:left-3 md:left-4 top-1/2 transform -translate-y-1/2 w-8 sm:w-10 md:w-12 h-8 sm:h-10 md:h-12 bg-black/40 hover:bg-black/60 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 pointer-events-auto group"
+                        className="absolute left-1 sm:left-2 md:left-3 top-1/2 transform -translate-y-1/2 w-8 sm:w-9 md:w-10 h-8 sm:h-9 md:h-10 bg-black/40 hover:bg-black/60 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 pointer-events-auto group z-20"
                     >
                         <ChevronLeft className="w-4 sm:w-5 md:w-6 h-4 sm:h-5 md:h-6 text-white group-hover:text-white/80" />
                     </button>
@@ -57,12 +57,12 @@ const EdgePreviews: React.FC<EdgePreviewsProps> = ({ currentIndex, stories, onNa
 
             {/* Right Edge Preview - responsive */}
             {nextStory && (
-                <div className="fixed right-0 top-0 h-full w-16 sm:w-24 md:w-32 z-20 pointer-events-none">
+                <div className="fixed right-0 top-0 h-full w-10 sm:w-16 md:w-24 z-10 pointer-events-none">
                     {/* Gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-l from-black/60 via-black/30 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-l from-black/40 via-black/20 to-transparent" />
 
                     {/* Preview content */}
-                    <div className="absolute inset-0 opacity-30 hover:opacity-60 transition-opacity duration-300">
+                    <div className="absolute inset-0 opacity-20 hover:opacity-40 transition-opacity duration-300">
                         <div
                             className="h-full opacity-40"
                             style={{ background: generateGradientCSS(`${nextStory.title}-${nextStory.id}`) }}
@@ -83,7 +83,7 @@ const EdgePreviews: React.FC<EdgePreviewsProps> = ({ currentIndex, stories, onNa
                     {/* Navigation button */}
                     <button
                         onClick={() => onNavigate('next')}
-                        className="absolute right-2 sm:right-3 md:right-4 top-1/2 transform -translate-y-1/2 w-8 sm:w-10 md:w-12 h-8 sm:h-10 md:h-12 bg-black/40 hover:bg-black/60 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 pointer-events-auto group"
+                        className="absolute right-1 sm:right-2 md:right-3 top-1/2 transform -translate-y-1/2 w-8 sm:w-9 md:w-10 h-8 sm:h-9 md:h-10 bg-black/40 hover:bg-black/60 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 pointer-events-auto group z-20"
                     >
                         <ChevronRight className="w-4 sm:w-5 md:w-6 h-4 sm:h-5 md:h-6 text-white group-hover:text-white/80" />
                     </button>
