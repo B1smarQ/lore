@@ -1741,8 +1741,11 @@ I add a fourth with a pen that becomes a pencil: “No plucking.”
 Placard:
 
 Title: The Almost Confession
+
 Medium: Breath caught between “I” and “love”
+
 Provenance: Kitchen, 2 a.m., tile cold, light off to keep courage from spooking
+
 Status: Deferred
 
 The piece is a chair and a shadow and a mug that remembers a mouth. On the table: a single white bud in a bottle.
@@ -2226,7 +2229,9 @@ How to Host a Laugh (Without Stealing It)
 - Disperse before someone tries to brand it.
 
 Author: Audience.
+
 Prepared by: E. Whitaker (facilitator).
+
 Price: Pay What You Won’t Regret.
 
 ---
@@ -2274,7 +2279,9 @@ Footnote in the margin: The canon is a guest book. Please print your name legibl
 A public ledger records blooms without claiming them.
 
 Entry 001 - Forum, Rome: Bloomed by crowd chorus; smelled like warm bread and lemon peel.
+
 Entry 002 - Gallery D, Vault: Bloomed during Listening Hour; laughter described as “ownership.”
+
 Entry 003 - Bridge, unnamed town: Bloomed when a joke landed at half-volume and half the room chose not to repeat it later.
 
 Unnumbered: Buds in kitchens, sidewalks, DM threads that end kindly.
