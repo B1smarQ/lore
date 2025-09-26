@@ -1764,8 +1764,11 @@ The Jester’s fingers flex on the ribbon. He does not raise the baton.
 Placard:
 
 Title: The Joke That Would Have Saved Him
+
 Medium: Timing missed by a traffic light and a pride that wouldn’t bend
+
 Provenance: Corner store, closing time, two men and a history
+
 Status: Irretrievable if forced
 
 The stage is taped on the floor. The light cue is a streetlamp that is also a halo that is also a warning. In the wings, a white bud leans away from a counterfeit laugh track.
@@ -1783,8 +1786,11 @@ We host a “listening minute.” People step into the taped square one by one, 
 Placard:
 
 Title: The Letter Never Sent
+
 Medium: Paper that tastes like rain
+
 Provenance: Desk drawer, three addresses, all correct
+
 Status: Folded, not sealed
 
 The envelope is translucent enough to show a handwriting that might be yours if you changed your mind about being afraid. A white bud rests in the stamp’s place.
@@ -1822,8 +1828,11 @@ He nods. The ribbon tightens.
 Placard:
 
 Title: The Crowd That Never Let Her Finish
+
 Medium: Microphone that sparks; chorus of interruptions; one joke with a spine
+
 Provenance: Comedy night, cover charge waived for hecklers
+
 Status: Interrupted
 
 The stage is empty except for a mic stand that won’t stand straight until invited. In the front row: a small white bud tucked under a seat.
@@ -1948,7 +1957,9 @@ Format: Redlined manuscript. Edits proposed by THE EDITOR; margins annotated by 
 EDITORIAL ORDER 0.1 (Broadcast):
 
 > Whereas the proliferation of white flowers constitutes a continuity hazard;
+
 > Whereas deferred punchlines produce narrative drift, social confusion, and legal ambiguity;
+
 > Therefore, by the authority vested in the Canon, Flowers are hereby classified as Errors, to be corrected by immediate closure. Pluck on sight. Approve corrections.
 
 Buttons appear over the city like weather:
@@ -2095,6 +2106,7 @@ Across the city, brackets fall from sentences. Marble remembers being a stage. T
 The Editor files a supplemental:
 
 > ERROR: Flowers: Reclassified as “Living Citations.”
+
 > GUIDELINE: Outlaw plucking; require hosting.
 
 A concession masquerading as command.
@@ -2104,9 +2116,13 @@ A concession masquerading as command.
 [01:03] Inventory - THE FINAL LAUGH (Revised)
 
 Object: THE FINAL LAUGH
+
 Previous Function: omnipotent cannon when audience expected a punchline
+
 Revised Function: baton that amplifies community timing upon invitation
+
 Failure Mode: misfires in imposed silence; reverts to baton in hostile crowds
+
 Ribbon: present, worn at the grip where hands meet
 
 Jester Status: no longer soloist; reliable first-chair chaos
