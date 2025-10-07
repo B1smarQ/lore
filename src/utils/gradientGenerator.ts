@@ -144,7 +144,6 @@ export function generateGradientCSS(seed: string): string {
         result = `linear-gradient(${cssDirection}, ${palette[0]}, ${palette[1]})`;
     }
 
-    console.log(`  Final gradient: ${result}`);
     return result;
 }
 
