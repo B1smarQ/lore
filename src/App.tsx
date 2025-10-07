@@ -14,7 +14,6 @@ import { Story } from './types';
 function App() {
     const [selectedStory, setSelectedStory] = useState<Story | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [_, setIsScrolling] = useState(false);
     const [showOnboarding, setShowOnboarding] = useState(true);
     const [currentStoryIndex, setCurrentStoryIndex] = useState(0);
     const [currentView, setCurrentView] = useState<'main' | 'branch-selection' | 'branch-story'>('main');
