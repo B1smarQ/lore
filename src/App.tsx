@@ -263,7 +263,25 @@ function App() {
     };
 
     const smoothScroll = () => {
-        if (scrollContainerRef.current && Math.abs(targetScrollLeftRef.current - currentScrollLeftRef.current) > 1) {
+        const container = scrollContainerRef.current;
+
+        if (!container) {
+            console.log('❌ SMOOTH SCROLL: No container available');
+            isAnimatingRef.current = false;
+            isSnappingRef.current = false;
+            return;
+        }
+
+        const distance = Math.abs(targetScrollLeftRef.current - currentScrollLeftRef.current);
+        console.log('🎬 SMOOTH SCROLL:', {
+            target: targetScrollLeftRef.current,
+            current: currentScrollLeftRef.current,
+            distance,
+            isSnapping: isSnappingRef.current,
+            containerScrollLeft: container.scrollLeft
+        });
+
+        if (distance > 1) {
             if (isSnappingRef.current) {
                 // Smooth snapping animation
                 const now = Date.now();
@@ -271,18 +289,15 @@ function App() {
                 const progress = Math.min(elapsed / snapDurationRef.current, 1);
                 const easedProgress = easeOutCubic(progress);
 
-
-
                 currentScrollLeftRef.current = snapStartPositionRef.current + (targetScrollLeftRef.current - snapStartPositionRef.current) * easedProgress;
 
+                console.log('📍 ANIMATION FRAME:', {
+                    progress: (progress * 100).toFixed(1) + '%',
+                    scrollLeft: currentScrollLeftRef.current.toFixed(1),
+                    target: targetScrollLeftRef.current
+                });
 
-
-                const container = scrollContainerRef.current;
-                if (container) {
-                    container.scrollLeft = currentScrollLeftRef.current;
-                } else {
-                    console.log('❌ NO CONTAINER during animation');
-                }
+                container.scrollLeft = currentScrollLeftRef.current;
 
                 if (progress < 1) {
                     animationFrameRef.current = requestAnimationFrame(smoothScroll);
@@ -295,35 +310,19 @@ function App() {
                         cancelAnimationFrame(animationFrameRef.current);
                         animationFrameRef.current = null;
                     }
-                    scrollContainerRef.current.scrollLeft = targetScrollLeftRef.current;
+                    container.scrollLeft = targetScrollLeftRef.current;
 
-                    // Update state after animation completes
-                    if (currentView === 'main' && scrollContainerRef.current) {
-                        const containerWidth = scrollContainerRef.current.clientWidth;
-                        const newIndex = Math.round(targetScrollLeftRef.current / containerWidth);
-                        if (newIndex !== currentStoryIndex && newIndex >= 0 && newIndex < stories.length) {
-                            console.log('🔄 STATE UPDATE AFTER ANIMATION:', currentStoryIndex, '→', newIndex);
-                            setCurrentStoryIndex(newIndex);
-                        }
-                    } else if (currentView === 'branch-story' && selectedBranch && scrollContainerRef.current) {
-                        const containerWidth = scrollContainerRef.current.clientWidth;
-                        const newIndex = Math.round(targetScrollLeftRef.current / containerWidth);
-                        const branchStories = branchStoryMap[selectedBranch as keyof typeof branchStoryMap];
-                        if (newIndex !== branchStoryIndex && newIndex >= 0 && newIndex < branchStories.length) {
-                            console.log('🔄 BRANCH STATE UPDATE AFTER ANIMATION:', branchStoryIndex, '→', newIndex);
-                            setBranchStoryIndex(newIndex);
-                        }
-                    }
+                    // Don't update state after keyboard navigation - it's already updated
+                    // This prevents double state updates that could cause issues
                 }
             } else {
                 // Regular wheel scrolling - more responsive
                 currentScrollLeftRef.current += (targetScrollLeftRef.current - currentScrollLeftRef.current) * 0.15;
-                scrollContainerRef.current.scrollLeft = currentScrollLeftRef.current;
+                container.scrollLeft = currentScrollLeftRef.current;
                 animationFrameRef.current = requestAnimationFrame(smoothScroll);
             }
         } else {
-
-
+            console.log('🏁 ANIMATION FINISHED - Distance too small');
             // Clean up animation state
             isAnimatingRef.current = false;
             isSnappingRef.current = false;
@@ -331,9 +330,7 @@ function App() {
                 cancelAnimationFrame(animationFrameRef.current);
                 animationFrameRef.current = null;
             }
-            if (scrollContainerRef.current) {
-                scrollContainerRef.current.scrollLeft = targetScrollLeftRef.current;
-            }
+            container.scrollLeft = targetScrollLeftRef.current;
         }
     };
 
@@ -537,19 +534,38 @@ function App() {
                         const newIndex = currentIndex - 1;
                         const snapTarget = newIndex * containerWidth;
 
+                        console.log('⌨️ KEYBOARD LEFT:', { currentIndex, newIndex, snapTarget });
+
+                        // Stop any existing animation
+                        if (isAnimatingRef.current && animationFrameRef.current) {
+                            cancelAnimationFrame(animationFrameRef.current);
+                            animationFrameRef.current = null;
+                        }
+
                         // Update state immediately
                         setCurrentStoryIndex(newIndex);
 
-                        snapStartTimeRef.current = Date.now();
-                        snapStartPositionRef.current = scrollContainerRef.current.scrollLeft;
-                        targetScrollLeftRef.current = snapTarget;
-                        isSnappingRef.current = true;
+                        // Start new animation with a small delay to ensure state is updated
+                        setTimeout(() => {
+                            if (scrollContainerRef.current) {
+                                snapStartTimeRef.current = Date.now();
+                                snapStartPositionRef.current = scrollContainerRef.current.scrollLeft;
+                                targetScrollLeftRef.current = snapTarget;
+                                currentScrollLeftRef.current = snapStartPositionRef.current;
+                                isSnappingRef.current = true;
+                                isAnimatingRef.current = true;
+                                snapDurationRef.current = 600;
 
-                        if (!isAnimatingRef.current) {
-                            isAnimatingRef.current = true;
-                            currentScrollLeftRef.current = snapStartPositionRef.current;
-                            smoothScroll();
-                        }
+                                console.log('🚀 STARTING ANIMATION:', {
+                                    startTime: snapStartTimeRef.current,
+                                    startPos: snapStartPositionRef.current,
+                                    target: targetScrollLeftRef.current,
+                                    duration: snapDurationRef.current
+                                });
+
+                                smoothScroll();
+                            }
+                        }, 10);
                     } else if (e.key === 'ArrowRight') {
                         e.preventDefault();
                         if (currentIndex === 10) {
@@ -559,32 +575,130 @@ function App() {
                             const newIndex = currentIndex + 1;
                             const snapTarget = newIndex * containerWidth;
 
+                            console.log('⌨️ KEYBOARD RIGHT:', { currentIndex, newIndex, snapTarget });
+
+                            // Stop any existing animation
+                            if (isAnimatingRef.current && animationFrameRef.current) {
+                                cancelAnimationFrame(animationFrameRef.current);
+                                animationFrameRef.current = null;
+                            }
+
                             // Update state immediately
                             setCurrentStoryIndex(newIndex);
 
-                            snapStartTimeRef.current = Date.now();
-                            snapStartPositionRef.current = scrollContainerRef.current.scrollLeft;
-                            targetScrollLeftRef.current = snapTarget;
-                            isSnappingRef.current = true;
+                            // Start new animation with a small delay to ensure state is updated
+                            setTimeout(() => {
+                                if (scrollContainerRef.current) {
+                                    snapStartTimeRef.current = Date.now();
+                                    snapStartPositionRef.current = scrollContainerRef.current.scrollLeft;
+                                    targetScrollLeftRef.current = snapTarget;
+                                    currentScrollLeftRef.current = snapStartPositionRef.current;
+                                    isSnappingRef.current = true;
+                                    isAnimatingRef.current = true;
+                                    snapDurationRef.current = 600;
 
-                            if (!isAnimatingRef.current) {
-                                isAnimatingRef.current = true;
-                                currentScrollLeftRef.current = snapStartPositionRef.current;
-                                smoothScroll();
-                            }
+                                    console.log('🚀 STARTING ANIMATION:', {
+                                        startTime: snapStartTimeRef.current,
+                                        startPos: snapStartPositionRef.current,
+                                        target: targetScrollLeftRef.current,
+                                        duration: snapDurationRef.current
+                                    });
+
+                                    smoothScroll();
+                                }
+                            }, 10);
                         }
                     }
                 } else if (currentView === 'branch-selection') {
                     // No keyboard shortcuts - users must use the back button
                     // This prevents accidental navigation and makes the UI more predictable
                     return;
-                } else if (currentView === 'branch-story') {
+                } else if (currentView === 'branch-story' && selectedBranch && scrollContainerRef.current) {
+                    const containerWidth = scrollContainerRef.current.clientWidth;
+                    const branchStories = branchStoryMap[selectedBranch as keyof typeof branchStoryMap];
+                    const currentIndex = branchStoryIndex;
+
                     if (e.key === 'ArrowLeft') {
                         e.preventDefault();
-                        handleEdgeNavigation('prev');
+                        if (currentIndex > 0) {
+                            const newIndex = currentIndex - 1;
+                            const snapTarget = newIndex * containerWidth;
+
+                            console.log('⌨️ BRANCH KEYBOARD LEFT:', { currentIndex, newIndex, snapTarget });
+
+                            // Stop any existing animation
+                            if (isAnimatingRef.current && animationFrameRef.current) {
+                                cancelAnimationFrame(animationFrameRef.current);
+                                animationFrameRef.current = null;
+                            }
+
+                            // Update state immediately
+                            setBranchStoryIndex(newIndex);
+
+                            // Start new animation with a small delay to ensure state is updated
+                            setTimeout(() => {
+                                if (scrollContainerRef.current) {
+                                    snapStartTimeRef.current = Date.now();
+                                    snapStartPositionRef.current = scrollContainerRef.current.scrollLeft;
+                                    targetScrollLeftRef.current = snapTarget;
+                                    currentScrollLeftRef.current = snapStartPositionRef.current;
+                                    isSnappingRef.current = true;
+                                    isAnimatingRef.current = true;
+                                    snapDurationRef.current = 600;
+
+                                    console.log('🚀 BRANCH LEFT STARTING ANIMATION:', {
+                                        startTime: snapStartTimeRef.current,
+                                        startPos: snapStartPositionRef.current,
+                                        target: targetScrollLeftRef.current,
+                                        duration: snapDurationRef.current
+                                    });
+
+                                    smoothScroll();
+                                }
+                            }, 10);
+                        } else {
+                            // Go back to branch selection
+                            setCurrentView('branch-selection');
+                        }
                     } else if (e.key === 'ArrowRight') {
                         e.preventDefault();
-                        handleEdgeNavigation('next');
+                        if (currentIndex < branchStories.length - 1) {
+                            const newIndex = currentIndex + 1;
+                            const snapTarget = newIndex * containerWidth;
+
+                            console.log('⌨️ BRANCH KEYBOARD RIGHT:', { currentIndex, newIndex, snapTarget });
+
+                            // Stop any existing animation
+                            if (isAnimatingRef.current && animationFrameRef.current) {
+                                cancelAnimationFrame(animationFrameRef.current);
+                                animationFrameRef.current = null;
+                            }
+
+                            // Update state immediately
+                            setBranchStoryIndex(newIndex);
+
+                            // Start new animation with a small delay to ensure state is updated
+                            setTimeout(() => {
+                                if (scrollContainerRef.current) {
+                                    snapStartTimeRef.current = Date.now();
+                                    snapStartPositionRef.current = scrollContainerRef.current.scrollLeft;
+                                    targetScrollLeftRef.current = snapTarget;
+                                    currentScrollLeftRef.current = snapStartPositionRef.current;
+                                    isSnappingRef.current = true;
+                                    isAnimatingRef.current = true;
+                                    snapDurationRef.current = 600;
+
+                                    console.log('🚀 BRANCH RIGHT STARTING ANIMATION:', {
+                                        startTime: snapStartTimeRef.current,
+                                        startPos: snapStartPositionRef.current,
+                                        target: targetScrollLeftRef.current,
+                                        duration: snapDurationRef.current
+                                    });
+
+                                    smoothScroll();
+                                }
+                            }, 10);
+                        }
                     } else if (e.key === 'Escape') {
                         e.preventDefault();
                         setCurrentView('branch-selection');
