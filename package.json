@@ -3,7 +3,7 @@
     "private": false,
     "version": "1.0.0",
     "type": "module",
-    "homepage": "https://[YOUR_USERNAME].github.io/chaos-lore-reader",
+    "homepage": "https://b1smarq.github.io/lore",
     "scripts": {
         "dev": "vite",
         "build": "tsc && vite build",
