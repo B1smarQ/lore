@@ -31,7 +31,7 @@ const branches: BranchOption[] = [
     {
         id: "yorozuki",
         title: "The Myriad Moon",
-        description: "Under a moon that's too big for the sky, the Jester becomes Bis Yorozuki—the myriad moon that shines on countless stories, offering encores instead of opening acts.",
+        description: "Under a moon that's too big for the sky, the Jester becomes Bis Yorozuki - the myriad moon that shines on countless stories, offering encores instead of opening acts.",
         tags: ['Moon', 'A New Beginning', 'Comedy']
     }
 
