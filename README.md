@@ -13,26 +13,7 @@ An immersive story reading experience featuring tales of a character who treats 
 - **Keyboard Navigation**: Use arrow keys to navigate between episodes
 - **Episode Indicators**: Visual dots for direct navigation
 
-## Stories Included
 
-### Main Storyline (Episodes 1-11)
-1. **The Final Laugh** - The Jester's signature chaos
-2. **The Jester's Gate** - Medieval mayhem and reality bending
-3. **La Divina Commedia** - Sacred comedy and holy roasts
-4. **Eclipsing Elation** - Out-fooling the Masked Fools
-5. **After Being Hit by Truck-Kun...** - Isekai parody and RPG breaking
-6. **The Jester Discovers TikTok** - Digital chaos and viral madness
-7. **The Jester Takes a Day Off** - The universe without chaos
-8. **The Jester vs. The Shipping Fandom** - AO3 apocalypse
-9. **The Jester Gets a Therapist** - Psychology meets chaos
-10. **Et Tu, Jester?** - Roman comedy and empire building
-11. **White Flower Origin** - The culmination story
-
-### Extended Stories (Episodes 12-15)
-12. **Between the Lines** - Dimensional observer's story
-13. **The Silent Garden** - Consensual chaos and silent gardens
-14. **The Editor's Last Stand** - Narrative control vs. creative freedom
-15. **The Archivist's Collection** - Hidden depths of unused endings
 
 ## Technology Stack
 
@@ -52,27 +33,6 @@ After completing Episode 11 "White Flower Origin", the story branches into four 
 - **Four Paths**: Choose from different narrative directions, each exploring unique aspects of the Jester universe
 - **Separate Experiences**: Each branch contains its own series of stories with independent navigation
 
-### The Four Paths
-
-**🔍 The Watcher's Path**
-- Follow the mysterious observer watching from between dimensions
-- Explore interdimensional mysteries and reality bridges
-- Tags: Observer, Dimensional, Mystery
-
-**🤫 The Mime's Silence** 
-- Delve into the world of consensual chaos and invitation
-- Learn the art of silence as a creative force
-- Tags: Mime, Silence, Consent
-
-**✏️ The Editor's Rebellion**
-- Witness the battle between narrative control and creative freedom
-- See what happens when stories fight back against editing
-- Tags: Editor, Control, Rebellion
-
-**📚 The Archivist's Secret**
-- Discover the hidden depths of the Museum of Unused Endings
-- Uncover the keys to reality itself
-- Tags: Archivist, Museum, Secrets
 
 ### Navigation
 - **Main Story**: Use arrow keys, mouse wheel, or navigation dots
@@ -140,3 +100,5 @@ MIT License - Feel free to use this for your own story collections!
 ---
 
 *Experience the chaos. Embrace the impossible.*
+
+This file has been created using AI tools
