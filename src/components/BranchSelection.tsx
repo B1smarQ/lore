@@ -27,6 +27,12 @@ const branches: BranchOption[] = [
         title: "The Museum Curator",
         description: "The Jester trades performance for preservation, becoming curator of unfinished stories while learning the art of institutional restraint.",
         tags: ['Museum', 'A New Beggining', 'Art']
+    },
+    {
+        id: "yorozuki",
+        title: "The Myriad Moon",
+        description: "Under a moon that's too big for the sky, the Jester becomes Bis Yorozuki—the myriad moon that shines on countless stories, offering encores instead of opening acts.",
+        tags: ['Moon', 'A New Beginning', 'Comedy']
     }
 
 ];

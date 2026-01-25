@@ -640,7 +640,646 @@ A: Every story deserves to exist as it is, not as what it could become.
         `
 }]
 
+export const yorozukiStories: Story[] = [
+    {
+        id: "yorozuki-1",
+        title: "The naming of Bis",
+        tags: ["New beginning", "Encore"],
+        content:
+            `
+# The Naming of Bis
+
+The moon was too big for the sky that night.
+
+It hung low over the city like a lantern someone had forgotten to put away after a festival three days ago: swollen, overripe, shimmering with at least four phases at once. If you stared too long you could swear you saw masks in it, or stages, or curtains about to rise.
+
+The city below did its best to keep up.
+
+Streets that by day belonged to vendors and commuters had split open into a hundred little theatres. Banners hung between crooked chimneys. Crates had become seats, wagons had become stages, and every alleyway held a busker convinced that *their* act would be the one the night remembered.
+
+Someone had declared this **The Long Night of Too Many Shows**.
+
+No one could agree who. That was usually a sign I’d been involved at some point.
+
+I wasn’t on the program.
+
+That was the point.
+
+---
+
+I walked through the chaos like a rumor in a borrowed coat.
+
+No checkerboard, no neon, no “HI I AM THE JESTER” stitched in sequins. Just a long jacket in theatre-black, hair tamed enough to pass as “eccentric” instead of “gravity lawsuit,” and a hat that could be anything depending on who looked at it: beret, bowler, halo, bad decision.
+
+The trick to enjoying a festival is not being the loudest thing in it.
+
+Tonight, the moon had that covered.
+
+“One more song!” someone bellowed from a balcony as a band on a wagon-stage tried to pack up.
+
+“Bis! Bis! Bis!” the balcony joined in.
+
+The chant rolled down the street, bounced off cobblestones, and collected other mouths as it went.
+
+Ah. So that’s what they were calling it here.
+
+Encore, in the gutter tongue: *Bis*.
+
+I drifted with the current, letting the shout of it wrap around me like a second coat.
+
+---
+
+There is a particular kind of performer who is very good the first time and terrible once they know it.
+
+I met three of them in the first hour.
+
+The first was a juggler whose hands shook as soon as the crowd got big enough to count. The second was a poet who had exactly one excellent poem and seventeen terrible opinions about rhyme. The third was a band - five kids, four instruments, three chords, two songs, one fragile confidence.
+
+They nailed the first song.
+
+The second began its slow, inevitable death around measure eight.
+
+From my vantage point half-behind a lamppost, I watched the drummer lose the beat, the singer forget a verse, the bass wander off to find itself, and the guitarist panic-solo into an entirely different key.
+
+The crowd winced. Then, like any crowd at a festival that did not want to feel guilty for having a bad time, it turned on them.
+
+“Booooo-”
+
+“Next-!”
+
+“Bis!” someone shouted out of habit, but it had the wrong shape: not “encore” but “make it stop.”
+
+There are many things you can let a night get away with.
+
+This was not one of them.
+
+---
+
+I slipped backstage by being the only thing in the doorway that wanted to go through it.
+
+“You’ve got one more in you,” I told the band over the sound of their collective self-loathing.
+
+“We’re done,” the singer groaned, crumpling around his guitar. “We’re dead. They’re going to talk about that trainwreck for years.”
+
+“They are,” I agreed. “Unless you give them something better.”
+
+The drummer glared at me from behind a fringe of sweat and hair.
+
+“Who are you?” she demanded.
+
+“Stagehand,” I lied, flicking my fingers. A coiled rope obligingly turned into a neatly folded towel and fell into her lap. “And tonight’s unsolicited timing consultant.”
+
+“We can’t play that song again,” the bassist muttered. “They’ll eat us.”
+
+“Of course not,” I said. “You play a different version of it.”
+
+I leaned in, lowering my voice to the crackle between their nerves.
+
+“Fast. Loud. Wrong on purpose. End it with a break you *all* hit together. Miss on your terms.”
+
+They stared.
+
+“Trust me,” I added. “The moon’s on your side.”
+
+Out front, the crowd was starting to heckle in earnest.
+
+“Bis! Bis! Or get off!”
+
+“They’re chanting for someone else,” the guitarist whispered.
+
+“No,” I said, smoothing a hand over the edge of the curtain. “They’re chanting for a second chance. That’s different.”
+
+---
+
+The band stumbled back into place as if walking to a firing squad.
+
+I took up position in the shadows by the lighting rig, which was really just three overworked lanterns and a particularly cooperative star.
+
+“We, uh-” the singer began into the murmur. “We’re gonna try that again.”
+
+“Bis!” yelled the balcony.
+
+“Bis! Bis!” answered the street.
+
+“But different,” the drummer shouted over them, and counted off a tempo twice as fast.
+
+This time, the mistakes landed like gags instead of failures.
+
+The off-key chorus became a deliberate shout-along. The botched bridge turned into a call-and-response where the crowd supplied wrong lyrics on purpose. The chaotic solo became a chase, guitar chasing drums chasing bass chasing the moonlight that refused to stay still.
+
+At the final hit - loud, messy, together - the wagon shook. The street roared. Someone threw a hat. Someone else threw a drink. Both hit the same heckler. The band laughed so hard they nearly missed their bow.
+
+“Bis! Bis! Bis!” the crowd screamed, this time with all the right shapes.
+
+I let myself grin.
+
+That was better.
+
+---
+
+Further down the street, a little stage had been set up in front of a shrine that looked like it had retired from divinity to pursue a freelance career in being ominous.
+
+Lanterns framed an old storyteller in layered robes. Children sat in a semicircle that grew and shrank as sugar and attention spans dictated. Adults lingered at the back, pretending not to listen.
+
+“Once,” the storyteller intoned, “there was a Moon that was never the same twice.”
+
+I stopped.
+
+“Each night,” they went on, “it shone upon a different tale. It saw heroes boast and villains weep. It watched comedies mislabel themselves as tragedies and tragedies sneak jokes past their censors. It grew bored of repetition - but never of surprise.”
+
+The children leaned in.
+
+“We called it *Yorozuki,*” the storyteller said. “The Myriad Moon. The one that has seen every story you can tell and still wants to see what *you* do.”
+
+One small hand shot up.
+
+“Does it ever help?” a kid asked. “Or does it just watch?”
+
+The storyteller smiled, eyes flicking very briefly toward where I was absolutely not hiding behind a pillar.
+
+“Sometimes,” they said, “if a story is *just* about to find its feet, and the Moon likes the beat, it taps the sky in time. That is all.”
+
+They snapped their fingers once.
+
+Above us, the oversized moon flickered like a stage light taking a bow.
+
+The kids squealed. The adults gasped. I pretended not to preen.
+
+“Can it hear us?” another child shouted at the sky. “Yorozuki! Are you listening?”
+
+The moon shifted phase, a sliver slicing across its face like a grin.
+
+“See?” the storyteller said. “It is curious. You have its attention. Be interesting.”
+
+---
+
+Later, between acts, between alleys, between one bad cup of festival coffee and the next, I found myself perched on the edge of a rooftop, watching the whole mess sway and glitter.
+
+“You’re enjoying yourself,” said a voice beside me.
+
+The Archivist, naturally, had found the one bit of roof that could plausibly be interpreted as a margin and occupied it.
+
+“It’s a good show,” I said.
+
+“You’re not on the bill,” they observed.
+
+“That’s why,” I replied.
+
+Below, someone missed a cue. Above, the moon winced in sympathy.
+
+The chant drifted up again from three different streets at once:
+
+“Bis! Bis! Bis!”
+
+“They don’t mean you,” the Archivist said.
+
+“Not yet,” I said.
+
+We watched a juggler recover a dropped torch with a flourish. The crowd forgave them. The moon approved.
+
+“Yorozuki, hmm?” I mused. “They tell good stories about you.”
+
+The Archivist tilted their head, studying my profile as if it were a page they weren’t entirely sure belonged in this volume.
+
+“You are thinking about names,” they said.
+
+“I am thinking,” I admitted, “that ‘The Jester’ is starting to sound like someone else. Or several someone-elses.”
+
+“File a request for rebranding.” the Archivist suggested dryly.
+
+“Tempting,” I said. “But then I’d have to fill out forms.”
+
+Down below, a drunk voice slurred through a megaphone:
+
+“OI! YOROZUKI! DO THAT AGAIN!”
+
+The shout hit me in the chest like a cue line I hadn’t known I’d been waiting for.
+
+“Well,” I said to the moon. “There it is.”
+
+It pulsed once, bright and amused.
+
+The Archivist scribbled something in an invisible notebook.
+
+“You could do worse,” they said. “As patrons go.”
+
+“Encore Myriad-Moon,” I tried the shape of it in my mouth. “Bis Yorozuki.”
+
+The syllables sat comfortably. Like a costume that fit too well to have been entirely accidental.
+
+“You should know,” the Archivist added, “once it’s in the catalog, it sticks.”
+
+“Good,” I said, standing. “Let’s see how it looks under a spotlight.”
+
+---
+
+I dropped back into the street just in time to catch the tail end of a disastrous magic act.
+
+Doves refusing to appear, scarves tying themselves in knots *around* the magician, a rabbit that had simply clocked out and gone home spiritually. The crowd was restless. A few people had already started drifting away toward the sound of better jokes.
+
+The magician’s hands shook. Their patter faltered.
+
+“For my final trick-” they began, voice wobbling.
+
+“Bis!” someone hollered. “Bis!”
+
+Dozens of eyes swung upward, as if expecting the moon to descend personally.
+
+I stepped out from the wings instead, flicking an invisible speck of dust from my too-normal coat.
+
+“You heard them,” I told the magician, quietly enough that only they could hear over the murmur. “They want one more. You don’t have to be alone for it.”
+
+Their eyes widened.
+
+“Who are you?” they whispered.
+
+I offered a little half-bow, as if to an equal.
+
+“Tonight?” I said. “Call me Bis Yorozuki.”
+
+I snapped my fingers.
+
+The moonlight narrowed to a tight circle on the stage.
+
+The crowd hushed, expectancy snapping into place like a trap about to be very pleasantly wrong.
+
+Encore, then.
+
+Let’s see what this name can do.
+            `
+    },
+    {
+        id: "yorozuki-2",
+        title: "Moonlight Cameos",
+        tags: ["Comedy", "Light"],
+        content:
+            `
+# Moonlight Cameos
+
+Three stages. Three disasters. One encore specialist.
+
+---
+
+## 1: The Band That Couldn't Stick the Landing
+
+The venue was called **The Rusty Anchor**, which was optimistic given that it was three blocks inland and had never seen a ship in its life.
+
+Inside, the walls were sticky with decades of spilled drinks and accumulated hopes. A stage the size of a large coffee table was wedged between the bar and the bathrooms. The sound system had opinions, and those opinions were mostly about feedback.
+
+The band was called **The Last Minute**, which was also optimistic.
+
+They had four members: a guitarist who thought he was in a metal band, a bassist who thought she was in a jazz trio, a drummer who thought he was in a marching band, and a singer who thought she was in a completely different song.
+
+Their first set was brilliant.
+
+Not good - *brilliant*. The kind of brilliant that happens when four people who have never met before accidentally discover they share a secret language made entirely of wrong notes that somehow make sense together. The crowd, which had been three people and a very patient bartender, swelled to twenty. Then thirty. Then someone opened the windows and the street started listening.
+
+The guitarist played a solo that sounded like a cat falling down stairs while reciting poetry. The bassist answered with a line that shouldn't have worked but did. The drummer found a beat that existed in the space between "too fast" and "too slow." The singer belted lyrics that were half-remembered, half-improvised, and entirely perfect.
+
+They finished to actual applause.
+
+Real applause. The kind that makes your hands hurt.
+
+"Encore!" someone shouted.
+
+"Bis!" someone else added, because the word was catching on.
+
+The band looked at each other. They had exactly one more song prepared. It was called "Midnight Train" and it was their *serious* one. The one they'd practiced. The one that was supposed to prove they were real musicians.
+
+They started it.
+
+And everything fell apart.
+
+The guitarist remembered the chords. The bassist remembered the melody. The drummer remembered the tempo. The singer remembered the words.
+
+They all remembered different songs.
+
+By measure four, the guitarist was playing something that sounded like a dirge. The bassist was trying to keep up with a melody that had left the building. The drummer was hitting things that weren't drums. The singer was singing words that didn't match any of it.
+
+The crowd winced. The applause died. Someone coughed.
+
+"Bis!" someone shouted, but this time it meant "make it stop."
+
+I was in the back, nursing a drink, when I felt the shift. The moment when a room full of people who had been *with* you suddenly aren't.
+
+I set down my glass.
+
+The band was trying to power through. The guitarist was sweating. The bassist had her eyes closed, probably praying. The drummer was hitting harder, as if volume could fix timing. The singer was mouthing words she'd forgotten.
+
+I slipped behind the stage, which was really just a curtain hung from a pipe, and found the drummer's spare sticks.
+
+"Hey," I said, appearing beside him like a stage direction someone had forgotten to write.
+
+He jumped. The beat stuttered.
+
+"Who-"
+
+"Stagehand," I said, which was technically true if you interpreted "stage" very loosely. "You've got a tempo problem."
+
+"We know," the guitarist hissed from across the stage, not looking up from his fretboard.
+
+"Not that kind," I said. "You're all playing the right song. Just not at the same time."
+
+I handed the drummer a new stick. It was slightly heavier than his others, and when he took it, his hand adjusted without him thinking about it.
+
+"Try this," I said. "And count out loud. Loud enough they can hear you."
+
+"Count?" the drummer said.
+
+"One, two, three, four," I said. "Like you're calling a square dance. Trust me."
+
+I moved to the bassist, who was still playing something that was technically correct but emotionally lost.
+
+"Your part's fine," I told her. "But you're a measure ahead. Wait for the count."
+
+She blinked. "What count?"
+
+"The one he's about to start," I said, pointing at the drummer.
+
+I didn't have time for the guitarist or the singer. The crowd was getting restless. Someone was booing politely.
+
+I snapped my fingers.
+
+The stage lights - which were really just two desk lamps and a string of fairy lights - narrowed to a tight circle. The rest of the room went dark.
+
+The band stopped, confused.
+
+"From the top," I called from the shadows. "But this time, listen to each other. The drummer's counting. Follow that."
+
+The drummer, who had been about to quit, looked at the stick in his hand. Looked at the crowd, which was now watching the spotlight instead of leaving. Looked at his bandmates, who were all staring at him.
+
+He took a breath.
+
+"One," he said.
+
+The bassist's eyes widened. She heard it.
+
+"Two," he said.
+
+The guitarist's fingers found the right chord.
+
+"Three," he said.
+
+The singer's mouth opened.
+
+"Four," he said.
+
+And they started again.
+
+This time, the mistakes became part of the song. The guitarist's "dirge" became a deliberate slow build. The bassist's wandering melody became a call that the guitar answered. The drummer's off-beat hits became syncopation. The singer's forgotten words became scat, then found their way back to the lyrics.
+
+They finished together. On the same beat. In the same key. With the same energy.
+
+The crowd exploded.
+
+"Bis! Bis! Bis!"
+
+The band bowed. The drummer threw me the stick back. I caught it, and it became a pen, which I used to sign a napkin someone was passing around.
+
+"Who was that?" the singer asked the drummer.
+
+"Stagehand," the drummer said, but he was grinning. "Best damn stagehand I've ever seen."
+
+I was already gone, slipping out the back door as the band started their third encore.
+
+---
+
+## 2: The Play That Forgot Its Lines
+
+The **Little Theatre of Nowhere Important** was having its annual production of *The Tragedy of Sir Reginald and the Dragon*, which was a play that had been written in a weekend, rehearsed in a month, and was currently being performed by people who had day jobs and very little sleep.
+
+It was, in other words, a community theatre production.
+
+The audience was mostly friends, family, and people who had gotten lost on their way to a different show. They were polite. They clapped at the right moments. They didn't throw things.
+
+Until Act Three.
+
+Act Three was where Sir Reginald was supposed to face the dragon and deliver his big speech about courage and honor and the price of doing the right thing. It was the emotional climax. The moment everything had been building toward.
+
+Sir Reginald, played by a man named Frank who worked at a hardware store, stepped onto the stage.
+
+The dragon, played by three people in a very large costume, waited.
+
+Frank opened his mouth.
+
+Nothing came out.
+
+He'd forgotten the lines.
+
+Not just forgotten them - his mind had gone completely blank. He could remember his character's name. He could remember that he was supposed to be brave. He could remember that this was important.
+
+But the words? Gone.
+
+The audience waited. Someone coughed.
+
+Frank tried again. "I... um..."
+
+The dragon costume shifted. One of the people inside whispered something, but it was too quiet to hear.
+
+Frank's face went red. He looked at the wings, which were stage left. He looked at the prompt box, which was empty because the prompter had gone to the bathroom. He looked at the audience, which was starting to feel sorry for him.
+
+"I..." he said again.
+
+This was the moment when a real professional would have improvised. But Frank was not a real professional. Frank was a man who sold paint on weekdays and played knights on weekends, and right now he was drowning.
+
+I was in the back row, having slipped in during intermission because I'd heard there was a show and I was curious.
+
+I stood up.
+
+"Excuse me," I said, and my voice carried without me trying to make it. "I believe I have a line here."
+
+Every head in the theatre turned.
+
+I walked down the aisle, not to the stage, but to the space between the stage and the first row, where I stopped and turned to face Frank.
+
+"Sir Reginald," I said, and I was no longer just a person in the audience. I was the **Spirit of Exposition**, and I was here to help.
+
+Frank stared at me.
+
+"The dragon," I continued, gesturing to the costume, which was now watching me with all six of its eyes, "has been waiting for you to remember what you came here to say."
+
+"I..." Frank said.
+
+"But perhaps," I said, turning to the audience, "the words aren't the important part. Perhaps what matters is what Sir Reginald *does*."
+
+I looked back at Frank. "Sir Reginald, you have come here to face a dragon. Why?"
+
+Frank blinked. "Because... because it's the right thing to do?"
+
+"Good," I said. "And what happens if you don't?"
+
+"The dragon... the dragon will keep terrorizing the village?"
+
+"Also good," I said. "So you're here to protect people. Even though you're scared."
+
+"I am scared," Frank admitted, and it was the most honest line he'd delivered all night.
+
+"Then say that," I said. "Tell the dragon you're scared. Tell the audience you're scared. Tell yourself you're scared. And then tell us why you're doing it anyway."
+
+Frank took a breath. Looked at the dragon. Looked at the audience. Looked at me.
+
+"I am Sir Reginald," he said, and his voice found its strength. "And I am terrified. This dragon could kill me. It has killed others. I have seen what it can do."
+
+The audience was silent, listening.
+
+"But I am here anyway," Frank continued, and the words were his own now, not from a script. "Because the people in that village don't have anyone else. Because someone has to try. Because being scared doesn't mean you can't be brave."
+
+The dragon costume shifted. One of the people inside started to say their line, but Frank wasn't done.
+
+"And you, dragon," he said, turning to face it fully. "You don't have to be the monster they say you are. You can choose. We can both choose."
+
+The script had called for a fight. The script had called for Sir Reginald to slay the dragon and return a hero.
+
+But Frank, in that moment, was writing a different ending.
+
+The dragon costume was quiet. Then, slowly, the head lifted. The person inside spoke, and their voice was not what the script had called for.
+
+"Sir Reginald," the dragon said. "I have been waiting for someone to ask."
+
+The audience gasped. This was not in the script.
+
+But it was better.
+
+Frank and the dragon improvised the rest of the scene. They talked. They negotiated. They found a solution that didn't involve death. The other actors, who had been waiting in the wings, saw what was happening and joined in, yes-and-ing the new direction.
+
+The play ended with Sir Reginald and the dragon becoming allies, the village being saved through diplomacy instead of violence, and the entire cast taking a bow to thunderous applause.
+
+After the show, Frank found me outside.
+
+"Who are you?" he asked.
+
+"Tonight?" I said. "I was the Spirit of Exposition. But you can call me Bis."
+
+"Bis?"
+
+"Encore," I said. "Second chance. Do-over."
+
+Frank grinned. "We're doing this play again next month. Want to come?"
+
+"I might," I said. "But I think you've got it from here."
+
+I left him standing there, already planning how to rewrite Act Three.
+
+---
+
+## 3: The Open Mic Where No One Signs Up
+
+**The Empty Stage** was a bar that had been named optimistically and was currently living up to its name in the worst way.
+
+It was open mic night. The sign-up sheet was on the wall. The microphone was set up. The stage lights were on. The sound system was working.
+
+No one had signed up.
+
+The emcee, a woman named Maya who had been doing this for three years and had never seen a night this dead, was standing by the mic, trying to coax volunteers.
+
+"Come on, folks," she said. "Anyone? A joke? A song? A poem? A story about your day? Anything?"
+
+Silence.
+
+The bar had maybe fifteen people in it. They were all studiously not looking at the stage. They were looking at their drinks, their phones, their hands, the ceiling - anything but Maya and that empty mic.
+
+"Okay," Maya said, and her voice was starting to crack. "How about this: I'll go first. I'll tell a joke. And then someone else can go. Deal?"
+
+She told a joke. It was a good joke. It got a few chuckles.
+
+Still no one moved.
+
+Maya's shoulders slumped. "Okay. Well. I guess we'll try again next week."
+
+I was at the bar, watching this whole thing unfold, and I felt something I hadn't felt in a while: actual pity.
+
+Not the kind of pity that makes you want to fix someone. The kind that makes you want to help them fix themselves.
+
+I stood up.
+
+"Actually," I said, and my voice carried. "I'll go."
+
+Every head turned. Maya's eyes widened.
+
+"You will?"
+
+"I will," I said, walking to the stage. "But I need a warm-up. And I work better with a partner."
+
+I looked at the audience. "Who here has never been on a stage before?"
+
+A few hands went up, tentatively.
+
+"Perfect," I said. "You, in the green shirt. Come up here."
+
+A young man in a green shirt looked around, as if I might be talking to someone else.
+
+"Me?"
+
+"You," I said. "Don't worry. I'm not going to make you do anything you don't want to do. But I'm going to teach you a game, and if you like it, you can play. If you don't, you can sit back down. Deal?"
+
+He hesitated, then nodded, and came up to the stage.
+
+"Okay," I said. "The game is called 'Yes, And.' I'm going to start a story. You're going to add one sentence. Then I'll add another. Then you add another. We keep going until we find an ending. The only rule is: you have to say 'yes, and' to whatever I say. You can't say 'no' or 'but.' You can only build on it. Got it?"
+
+He nodded again, looking nervous.
+
+"Great," I said. "I'll start. Once upon a time, there was a bar called The Empty Stage."
+
+The young man thought for a second. "Yes, and... it was the emptiest stage in the whole city."
+
+"Perfect," I said. "Yes, and one night, a stranger walked in with a suitcase full of stories."
+
+"Yes, and..." the young man said, getting into it. "The suitcase was so full that stories kept falling out and landing on people's heads."
+
+"Yes, and the stories were sticky, like honey, so they stuck to whoever they hit."
+
+"Yes, and the people started telling those stories to each other, and the bar got so loud that the stage stopped being empty."
+
+We went back and forth for a few minutes, building a ridiculous, wonderful story together. The audience was laughing. Other people were raising their hands, wanting to join in.
+
+When we finished, the young man was beaming.
+
+"That was fun," he said.
+
+"It was," I agreed. "Want to try it on your own? You can tell your own story. Or sing a song. Or do whatever you want. The mic's yours."
+
+He looked at the mic. Looked at the audience. Looked at me.
+
+"Okay," he said. "I'll try."
+
+He told a story about his cat. It wasn't perfect. He stumbled over words. He forgot parts. But he finished, and the audience clapped, and he sat back down looking like he'd just won something.
+
+"Who's next?" Maya called, and this time, hands shot up.
+
+I stepped back, letting the night take over. People got up. They told jokes, sang songs, read poems, shared stories. Some were good. Some were terrible. All of them were brave.
+
+By the end of the night, the sign-up sheet was full, and Maya was crying happy tears.
+
+"Thank you," she said to me, when the last person had finished and the bar was closing.
+
+"For what?" I said.
+
+"For showing them they could," she said.
+
+"I didn't show them anything," I said. "I just reminded them they already knew how."
+
+I left The Empty Stage feeling lighter than I had in weeks.
+
+The trick to being an encore isn't about being the best act. It's about making sure there's always another act ready to go.
+
+And sometimes, the best encore is the one where you're not even on the bill.
+
+---
+
+Three stages. Three disasters. Three second chances.
+
+The moon was still too big for the sky, and I was still learning what it meant to be Bis Yorozuki.
+
+But I was getting there.
+
+One encore at a time.
+
+            `
+    }
+]
+
 export const branchStoryMap = {
     martinus: martinusStories,
-    museum: museumStories
+    museum: museumStories,
+    yorozuki: yorozukiStories
 };
