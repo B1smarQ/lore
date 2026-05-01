@@ -3,13 +3,24 @@
 @tailwind utilities;
 
 @layer base {
+    :root {
+        color-scheme: dark;
+        background: #08090a;
+    }
+
     body {
-        @apply bg-black text-gray-100 overflow-hidden;
+        @apply overflow-hidden bg-[#08090a] text-zinc-100 antialiased;
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        text-rendering: optimizeLegibility;
     }
 
     html {
         @apply overflow-hidden;
+    }
+
+    ::selection {
+        background: rgba(45, 212, 191, 0.25);
+        color: #f8fafc;
     }
 
     /* Custom scrollbar */
@@ -19,15 +30,15 @@
     }
 
     ::-webkit-scrollbar-track {
-        @apply bg-gray-800;
+        @apply bg-zinc-950;
     }
 
     ::-webkit-scrollbar-thumb {
-        @apply bg-gray-600 rounded-full;
+        @apply rounded-full bg-zinc-700;
     }
 
     ::-webkit-scrollbar-thumb:hover {
-        @apply bg-gray-500;
+        @apply bg-zinc-600;
     }
 }
 
@@ -68,28 +79,24 @@
         position: relative;
     }
 
-    .story-blend::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -12px;
-        width: 24px;
-        height: 100%;
-        background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.06), transparent);
-        pointer-events: none;
-        z-index: 0;
-    }
-
+    .story-blend::before,
     .story-blend::after {
         content: '';
         position: absolute;
         top: 0;
-        right: -12px;
-        width: 24px;
+        width: 1px;
         height: 100%;
-        background: linear-gradient(to left, transparent, rgba(0, 0, 0, 0.06), transparent);
+        background: rgba(255, 255, 255, 0.06);
         pointer-events: none;
         z-index: 0;
+    }
+
+    .story-blend::before {
+        left: 0;
+    }
+
+    .story-blend::after {
+        right: 0;
     }
 
     /* Onboarding animations */
@@ -766,6 +773,7 @@ Navigation dots scrolling improvements */
 .dots-container {
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
+    align-items: center;
 }
 
 /* Hide scrollbar for dots but keep functionality */
@@ -781,8 +789,8 @@ Navigation dots scrolling improvements */
 /* Improve dot visibility and interaction */
 @media (max-width: 640px) {
     .navigation-dot {
-        min-width: 12px;
-        min-height: 12px;
+        min-width: 10px;
+        min-height: 10px;
     }
 
     /* Add more spacing on mobile for easier tapping */
@@ -793,6 +801,11 @@ Navigation dots scrolling improvements */
 
 /* Smooth transitions for dot scaling */
 .navigation-dot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 10px;
+    min-height: 10px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
