@@ -13,11 +13,17 @@ interface StoryModalProps {
 const StoryModal: React.FC<StoryModalProps> = ({ story, isOpen, onClose }) => {
     const dialogRef = useRef<HTMLDivElement>(null);
     const closeButtonRef = useRef<HTMLButtonElement>(null);
+    const storyRef = useRef<Story | null>(story);
     const [selectedChapterId, setSelectedChapterId] = useState<string | undefined>(undefined);
 
     useEffect(() => {
-        setSelectedChapterId(story?.chapters?.[0]?.id);
-    }, [story?.id, story?.chapters]);
+        storyRef.current = story;
+    });
+
+    useEffect(() => {
+        const chapters = storyRef.current?.chapters || [];
+        setSelectedChapterId(chapters[0]?.id);
+    }, [story?.id]);
 
     useEffect(() => {
         if (!isOpen) return;
@@ -62,7 +68,7 @@ const StoryModal: React.FC<StoryModalProps> = ({ story, isOpen, onClose }) => {
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-3 backdrop-blur-md sm:p-6" role="dialog" aria-modal="true" aria-label={story.title}>
-            <button className="absolute inset-0 cursor-default" aria-label="Close story dialog" onClick={onClose} />
+            <div className="absolute inset-0 cursor-default" role="presentation" aria-hidden="true" onClick={onClose} />
 
             <div ref={dialogRef} className="relative flex max-h-[92vh] w-full max-w-5xl flex-col overflow-hidden rounded-lg border border-white/10 bg-[#101113] shadow-2xl shadow-black/60">
                 <div

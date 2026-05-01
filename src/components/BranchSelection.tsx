@@ -25,7 +25,7 @@ const branches: BranchOption[] = [
         id: 'museum',
         title: 'The Museum Curator',
         description: 'The Jester trades performance for preservation, becoming curator of unfinished stories while learning the art of institutional restraint.',
-        tags: ['Museum', 'A New Beggining', 'Art']
+        tags: ['Museum', 'A New Beginning', 'Art']
     },
     {
         id: 'yorozuki',
