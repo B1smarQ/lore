@@ -74,14 +74,16 @@ export function generateGradient(seed: string): string {
     // For some variety, occasionally use 3 colors instead of 2
     const useThreeColors = (hash % 7) === 0; // ~14% chance
 
+    const arbitraryOpen = '[';
+
     if (useThreeColors && palette.length >= 2) {
         // Add a third color by blending or picking from another palette
         const secondPaletteIndex = (paletteIndex + 1) % colorPalettes.length;
         const thirdColor = colorPalettes[secondPaletteIndex][0];
-        return `from-[${palette[0]}] via-[${palette[1]}] ${direction} to-[${thirdColor}]`;
+        return `from-${arbitraryOpen}${palette[0]}] via-${arbitraryOpen}${palette[1]}] ${direction} to-${arbitraryOpen}${thirdColor}]`;
     }
 
-    return `from-[${palette[0]}] ${direction} to-[${palette[1]}]`;
+    return `from-${arbitraryOpen}${palette[0]}] ${direction} to-${arbitraryOpen}${palette[1]}]`;
 }
 
 /**

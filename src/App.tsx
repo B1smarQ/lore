@@ -8,13 +8,12 @@ import FloatingElements from './components/FloatingElements';
 // import OnboardingOverlay from './components/OnboardingOverlay';
 // import EdgePreviews from './components/EdgePreviews';
 import RealityManager from './components/RealityManager';
-import GlitchEffects from './components/GlitchEffects';
+import { ArrowLeft } from 'lucide-react';
 import { Story } from './types';
 
 function App() {
     const [selectedStory, setSelectedStory] = useState<Story | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [showOnboarding, setShowOnboarding] = useState(true);
     const [currentStoryIndex, setCurrentStoryIndex] = useState(0);
     const [currentView, setCurrentView] = useState<'main' | 'branch-selection' | 'branch-story'>('main');
     const [selectedBranch, setSelectedBranch] = useState<string | null>(null);
@@ -90,16 +89,6 @@ function App() {
             }
         }, 50);
     };
-
-
-
-
-
-    // const handleOnboardingComplete = () => {
-    //     setShowOnboarding(false);
-    //     localStorage.setItem('chaos-lore-onboarding-seen', 'true');
-    // };
-
     const handleEdgeNavigation = (direction: 'prev' | 'next') => {
         if (currentView === 'main') {
             if (!scrollContainerRef.current) return;
@@ -175,14 +164,6 @@ function App() {
             }
         }
     };
-
-    // Check if user has seen onboarding before
-    useEffect(() => {
-        const hasSeenOnboarding = localStorage.getItem('chaos-lore-onboarding-seen');
-        if (hasSeenOnboarding) {
-            setShowOnboarding(false);
-        }
-    }, []);
 
     // Function to scroll dots container to keep active dot visible
     const scrollDotsToActive = (index: number) => {
@@ -753,71 +734,39 @@ function App() {
     return (
         <RealityManager chaosLevel="medium">
             <div className={`h-screen relative ${currentView === 'branch-selection' ? 'overflow-y-auto' : 'overflow-hidden'}`}>
-                {/* Subtle mystical background */}
-                <div className="absolute inset-0">
-                    {/* Base gradient - much more subtle */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-purple-900/8 via-black to-blue-900/8" />
-
-                    {/* Floating energy orbs - reduced opacity */}
-                    <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-gradient-to-r from-purple-500/6 to-pink-500/6 blur-3xl animate-pulse-slow" />
-                    <div className="absolute bottom-1/3 right-1/4 w-80 h-80 rounded-full bg-gradient-to-r from-cyan-500/4 to-blue-500/4 blur-3xl animate-float" />
-                    <div className="absolute top-1/2 left-1/2 w-64 h-64 rounded-full bg-gradient-to-r from-violet-500/3 to-indigo-500/3 blur-2xl animate-pulse" />
-
-                    {/* Mystical particles - much more subtle */}
-                    <div className="absolute inset-0 opacity-10">
-                        <div className="absolute top-10 left-10 w-1 h-1 bg-white/40 rounded-full animate-ping" style={{ animationDelay: '0s' }} />
-                        <div className="absolute top-32 right-20 w-0.5 h-0.5 bg-purple-400/40 rounded-full animate-ping" style={{ animationDelay: '1s' }} />
-                        <div className="absolute bottom-40 left-1/3 w-1 h-1 bg-cyan-400/40 rounded-full animate-ping" style={{ animationDelay: '2s' }} />
-                        <div className="absolute top-1/2 right-1/3 w-0.5 h-0.5 bg-pink-400/40 rounded-full animate-ping" style={{ animationDelay: '3s' }} />
-                        <div className="absolute bottom-20 right-10 w-0.5 h-0.5 bg-violet-400/40 rounded-full animate-ping" style={{ animationDelay: '4s' }} />
-                    </div>
-
-                    {/* Dimensional grid - barely visible */}
-                    <div className="absolute inset-0 opacity-2" style={{
-                        backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.2) 1px, transparent 0)`,
-                        backgroundSize: '100px 100px'
-                    }} />
-                </div>
-
-                {/* Ambient floating elements for additional depth */}
+                <div className="absolute inset-0 bg-[#08090a]" />
                 <FloatingElements />
 
-                {/* Onboarding removed for minimal UI */}
-
-                {/* Mystical header */}
-                <header className="absolute top-0 left-0 right-0 z-30 p-6 sm:p-8 backdrop-blur-sm bg-black/20 border-b border-white/10">
-                    <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-4">
-                            <GlitchEffects intensity="medium" isActive={!showOnboarding}>
-                                <h1 className="text-xl sm:text-2xl font-light tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">
-                                    CHAOS LORE
-                                </h1>
-                            </GlitchEffects>
-                            <div className="hidden sm:block w-px h-6 bg-gradient-to-b from-purple-400/50 to-cyan-400/50" />
-                            <span className="hidden sm:inline text-sm text-gray-300 font-light tracking-wide">
+                <header className="absolute left-0 right-0 top-0 z-30 border-b border-white/10 bg-[#08090a]/80 px-5 py-4 backdrop-blur-xl sm:px-8">
+                    <div className="mx-auto flex max-w-7xl items-center justify-between gap-5">
+                        <div className="flex min-w-0 items-center gap-4">
+                            <h1 className="text-base font-semibold tracking-normal text-zinc-50 sm:text-lg">
+                                Chaos Lore
+                            </h1>
+                            <div className="hidden h-5 w-px bg-white/10 sm:block" />
+                            <span className="hidden truncate text-sm text-zinc-400 sm:inline">
                                 {currentView === 'main' && 'Dimensional Stories'}
                                 {currentView === 'branch-selection' && 'Reality Fractures'}
                                 {currentView === 'branch-story' && selectedBranch && `${selectedBranch.charAt(0).toUpperCase() + selectedBranch.slice(1)} Dimension`}
                             </span>
                         </div>
 
-                        {/* Enhanced counter */}
-                        <div className="text-sm text-gray-300 font-mono tracking-wider">
+                        <div className="flex-shrink-0 font-mono text-xs tracking-[0.18em] text-zinc-400">
                             {currentView === 'main' && (
-                                <div className="flex items-center gap-2">
-                                    <div className="w-2 h-2 rounded-full bg-gradient-to-r from-purple-400 to-cyan-400 animate-pulse" />
+                                <div className="flex items-center gap-3">
+                                    <div className="h-1.5 w-1.5 rounded-full bg-teal-300" />
                                     <span>{String(currentStoryIndex + 1).padStart(2, '0')} / {String(stories.length).padStart(2, '0')}</span>
                                 </div>
                             )}
                             {currentView === 'branch-selection' && (
-                                <div className="flex items-center gap-2">
-                                    <div className="w-2 h-2 rounded-full bg-gradient-to-r from-pink-400 to-violet-400 animate-pulse" />
-                                    <span>CHOOSE DIMENSION</span>
+                                <div className="flex items-center gap-3">
+                                    <div className="h-1.5 w-1.5 rounded-full bg-amber-300" />
+                                    <span>CHOOSE PATH</span>
                                 </div>
                             )}
                             {currentView === 'branch-story' && selectedBranch && (
-                                <div className="flex items-center gap-2">
-                                    <div className="w-2 h-2 rounded-full bg-gradient-to-r from-cyan-400 to-purple-400 animate-pulse" />
+                                <div className="flex items-center gap-3">
+                                    <div className="h-1.5 w-1.5 rounded-full bg-teal-300" />
                                     <span>{String(branchStoryIndex + 1).padStart(2, '0')} / {String(branchStoryMap[selectedBranch as keyof typeof branchStoryMap].length).padStart(2, '0')}</span>
                                 </div>
                             )}
@@ -876,9 +825,10 @@ function App() {
                             <div className="absolute top-20 sm:top-24 left-6 z-40">
                                 <button
                                     onClick={() => setCurrentView('branch-selection')}
-                                    className="px-4 py-2 rounded-md bg-white/10 border border-white/15 hover:bg-white/15 hover:border-white/25 transition-colors text-white backdrop-blur-sm shadow-lg"
+                                    className="inline-flex h-11 items-center gap-3 rounded-full border border-white/10 bg-[#101113]/80 px-4 text-sm text-zinc-300 backdrop-blur-xl transition hover:border-white/20 hover:bg-white/[0.08] hover:text-white focus:outline-none focus:ring-2 focus:ring-white/25"
                                 >
-                                    ← Choose Different Path
+                                    <ArrowLeft size={17} />
+                                    Choose different path
                                 </button>
                             </div>
                         </>
@@ -888,13 +838,13 @@ function App() {
 
                     {/* Modern navigation */}
                     {currentView !== 'branch-selection' && (
-                        <div className="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-30 pointer-events-auto w-full px-4">
-                            <div className="flex items-center justify-center space-x-6 w-full">
+                        <div className="pointer-events-auto absolute bottom-5 left-1/2 z-30 w-full -translate-x-1/2 px-4 sm:bottom-7">
+                            <div className="mx-auto flex w-full max-w-3xl items-center justify-center gap-5 rounded-full border border-white/10 bg-[#101113]/80 px-4 py-3 backdrop-blur-xl">
                                 {/* Progress bar */}
-                                <div className="hidden sm:flex items-center space-x-4">
-                                    <div className="w-32 sm:w-48 h-px bg-white/20 relative">
+                                <div className="hidden items-center gap-4 sm:flex">
+                                    <div className="relative h-px w-36 bg-white/10 sm:w-52">
                                         <div
-                                            className="absolute left-0 top-0 h-full bg-white transition-all duration-500 ease-out"
+                                            className="absolute left-0 top-0 h-full bg-zinc-100 transition-all duration-500 ease-out"
                                             style={{
                                                 width: currentView === 'main'
                                                     ? `${((currentStoryIndex + 1) / stories.length) * 100}%`
@@ -904,32 +854,32 @@ function App() {
                                             }}
                                         />
                                     </div>
-                                    <span className="text-xs font-mono text-gray-400">
+                                    <span className="font-mono text-xs text-zinc-500">
                                         {currentView === 'main' && `${String(currentStoryIndex + 1).padStart(2, '0')}/${String(stories.length).padStart(2, '0')}`}
                                         {currentView === 'branch-story' && selectedBranch && `${String(branchStoryIndex + 1).padStart(2, '0')}/${String(branchStoryMap[selectedBranch as keyof typeof branchStoryMap].length).padStart(2, '0')}`}
                                     </span>
                                 </div>
 
                                 {/* Dots container */}
-                                <div className="max-w-[75vw] sm:max-w-sm md:max-w-md relative mx-auto">
+                                <div className="relative mx-auto max-w-[72vw] sm:max-w-sm md:max-w-md">
                                     <div
                                         ref={dotsContainerRef}
-                                        className="dots-container relative flex gap-2 overflow-x-auto scrollbar-hide px-2 py-2"
+                                        className="dots-container relative flex items-center gap-2 overflow-x-auto scrollbar-hide px-2 py-2"
                                     >
                                         {/* Gradient fades */}
-                                        <div className="dots-fade-left absolute left-0 top-0 h-full w-6" style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.6), transparent)' }} />
-                                        <div className="dots-fade-right absolute right-0 top-0 h-full w-6" style={{ background: 'linear-gradient(to left, rgba(0,0,0,0.6), transparent)' }} />
+                                        <div className="dots-fade-left absolute left-0 top-0 h-full w-6" style={{ background: 'linear-gradient(to right, rgba(16,17,19,0.95), transparent)' }} />
+                                        <div className="dots-fade-right absolute right-0 top-0 h-full w-6" style={{ background: 'linear-gradient(to left, rgba(16,17,19,0.95), transparent)' }} />
 
                                         {currentView === 'main' && stories.map((_, index) => (
                                             <button
                                                 key={index}
-                                                className={`navigation-dot flex-shrink-0 w-3 h-3 cursor-pointer transition-all duration-300 rounded-full ${index === currentStoryIndex
+                                                className={`navigation-dot h-2.5 w-2.5 flex-shrink-0 cursor-pointer rounded-full border transition-all duration-300 ${index === currentStoryIndex
                                                     ? index === 10
-                                                        ? 'bg-gradient-to-r from-purple-400 to-pink-400 scale-150 shadow-lg shadow-purple-400/50'
-                                                        : 'bg-gradient-to-r from-purple-300 to-cyan-300 scale-150 shadow-lg shadow-cyan-400/30'
+                                                        ? 'scale-125 border-amber-300 bg-amber-300'
+                                                        : 'scale-125 border-zinc-100 bg-zinc-100'
                                                     : index === 10
-                                                        ? 'bg-gradient-to-r from-purple-400/30 to-pink-400/30 hover:from-purple-400/60 hover:to-pink-400/60'
-                                                        : 'bg-gradient-to-r from-white/20 to-white/30 hover:from-white/40 hover:to-white/50'
+                                                        ? 'border-amber-300/30 bg-amber-300/20 hover:border-amber-300/70'
+                                                        : 'border-white/15 bg-white/10 hover:border-white/40'
                                                     }`}
                                                 aria-label={`Go to episode ${String(index + 1).padStart(2, '0')}: ${stories[index].title}${index === 10 ? ' (Reality Fractures Available)' : ''}`}
                                                 title={`Go to ${stories[index].title}${index === 10 ? ' (Reality Fractures Available)' : ''}`}
@@ -973,7 +923,7 @@ function App() {
                                         {/* Enhanced branch indicator dot */}
                                         {currentView === 'main' && (
                                             <button
-                                                className="navigation-dot flex-shrink-0 w-4 h-4 cursor-pointer transition-all duration-300 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-400 hover:to-pink-400 animate-pulse rounded-full shadow-lg shadow-purple-500/50 border border-white/20"
+                                                className="navigation-dot h-2.5 w-2.5 flex-shrink-0 cursor-pointer rounded-full border border-amber-300 bg-amber-300 transition-all duration-300 hover:scale-125"
                                                 aria-label="Access reality fractures"
                                                 title="Click to access reality fractures"
                                                 onClick={() => setCurrentView('branch-selection')}
@@ -983,9 +933,9 @@ function App() {
                                         {currentView === 'branch-story' && selectedBranch && branchStoryMap[selectedBranch as keyof typeof branchStoryMap].map((_, index) => (
                                             <button
                                                 key={index}
-                                                className={`navigation-dot flex-shrink-0 w-3 h-3 cursor-pointer transition-all duration-300 rounded-full ${index === branchStoryIndex
-                                                    ? 'bg-gradient-to-r from-cyan-400 to-purple-400 scale-150 shadow-lg shadow-cyan-400/30'
-                                                    : 'bg-gradient-to-r from-cyan-400/20 to-purple-400/20 hover:from-cyan-400/50 hover:to-purple-400/50'
+                                                className={`navigation-dot h-2.5 w-2.5 flex-shrink-0 cursor-pointer rounded-full border transition-all duration-300 ${index === branchStoryIndex
+                                                    ? 'scale-125 border-zinc-100 bg-zinc-100'
+                                                    : 'border-white/15 bg-white/10 hover:border-white/40'
                                                     }`}
                                                 aria-label={`Go to dimensional story ${String(index + 1).padStart(2, '0')}`}
                                                 onClick={() => {
@@ -1023,17 +973,17 @@ function App() {
 
                     {/* Navigation hints - hidden for branch-selection to prevent overlap */}
                     {currentView !== 'branch-selection' && (
-                        <div className="absolute bottom-16 sm:bottom-20 left-1/2 transform -translate-x-1/2 z-30 pointer-events-none">
-                            <p className="text-white/60 text-xs sm:text-sm text-center px-4">
+                        <div className="pointer-events-none absolute bottom-20 left-1/2 z-30 -translate-x-1/2 sm:bottom-24">
+                            <p className="px-4 text-center text-xs text-zinc-500 sm:text-sm">
                                 {currentView === 'main' && (
                                     <>
-                                        <span className="hidden sm:inline">Use mouse wheel or arrow keys • After story 11: Choose your path</span>
-                                        <span className="sm:hidden">Swipe or tap dots • After story 11: Choose path</span>
+                                        <span className="hidden sm:inline">Use mouse wheel or arrow keys · after story 11, choose your path</span>
+                                        <span className="sm:hidden">Swipe or tap dots · story 11 unlocks paths</span>
                                     </>
                                 )}
                                 {currentView === 'branch-story' && (
                                     <>
-                                        <span className="hidden sm:inline">Use arrow keys to navigate • Press Esc to return to path selection</span>
+                                        <span className="hidden sm:inline">Use arrow keys to navigate · press Esc to return to path selection</span>
                                         <span className="sm:hidden">Swipe to navigate</span>
                                     </>
                                 )}
