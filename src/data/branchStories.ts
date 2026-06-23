@@ -1278,7 +1278,7 @@ One encore at a time.
     }
 ]
 
-export const nietschzeStoreis: Story[] = [
+export const nietschzeStories: Story[] = [
     {
         id:"evil-1",
         title:"Thus Spoke Jester",
@@ -2207,5 +2207,6 @@ On purpose.
 export const branchStoryMap = {
     martinus: martinusStories,
     museum: museumStories,
-    yorozuki: yorozukiStories
+    yorozuki: yorozukiStories,
+    evil: nietschzeStories
 };
